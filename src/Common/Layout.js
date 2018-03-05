@@ -2,12 +2,14 @@ import React from 'react';
 import glamorous from 'glamorous';
 
 const Layout = glamorous.div({
+  height: '100%',
   display: 'grid',
-  gridTemplateColumns: 'auto',
-  gridTemplateRows: '80px auto',
+  gridTemplateColumns: '1fr',
+  gridTemplateRows: '80px 1fr 80px',
   gridTemplateAreas: `
       "header"
       "content"
+      "footer"
     `,
 });
 

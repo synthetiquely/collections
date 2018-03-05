@@ -3,6 +3,7 @@ import glamorous from 'glamorous';
 
 const Header = glamorous.header({
   gridArea: 'header',
+  gridColumn: '1 / -1',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
