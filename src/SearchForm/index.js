@@ -43,6 +43,7 @@ const Button = glamorous.button({
     borderColor: '#ffdb4d',
   },
   backgroundColor: '#fff',
+  cursor: 'pointer',
 });
 
 export default SearchForm;

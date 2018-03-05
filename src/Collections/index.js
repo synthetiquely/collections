@@ -13,6 +13,8 @@ class Collections extends Component {
       selected: null,
     };
     this.onClose = this.onClose.bind(this);
+    this.onNext = this.onNext.bind(this);
+    this.onPrevious = this.onPrevious.bind(this);
   }
 
   onClick(index) {
@@ -76,13 +78,15 @@ class Collections extends Component {
     return (
       <Views>
         {this.renderItems()}
-        {selected && (
+        {selected !== null && (
           <ImagePreview
-            isOpen={!!selected}
+            isOpen={selected !== null}
             src={api[selected].src}
             id={api[selected].id}
             title={api[selected].title}
             onClose={this.onClose}
+            onNext={this.onNext}
+            onPrevious={this.onPrevious}
           />
         )}
       </Views>

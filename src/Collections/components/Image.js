@@ -9,6 +9,7 @@ const View = glamorous.div(
     ':hover': {
       boxShadow: '1px 1px 1px 1px #ccc',
     },
+    cursor: 'pointer',
   },
   ({ orientation }) => {
     if (orientation === 'landscape') {

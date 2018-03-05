@@ -16,7 +16,7 @@ const Window = glamorous.div({
   top: '50%',
   left: '50%',
   zIndex: '9999',
-  padding: '20px',
+  padding: '30px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -26,12 +26,49 @@ const Window = glamorous.div({
 
 const CloseButton = glamorous.span({
   position: 'absolute',
-  top: '-8px',
-  right: '3px',
+  top: '-5px',
+  right: '5px',
   color: '#aaa',
   fontSize: '28px',
   fontWeight: 'bold',
   cursor: 'pointer',
+});
+
+const Next = glamorous.span({
+  position: 'absolute',
+  top: '50%',
+  right: '0',
+  width: 'auto',
+  marginTop: '-22px',
+  padding: '10px',
+  color: '#000',
+  fontWeight: 'bold',
+  fontSize: '18px',
+  transition: '0.6s ease',
+  borderRadius: '0 3px 3px 0',
+  cursor: 'pointer',
+  ':hover,:active,:focus': {
+    backgroundColor: '#ffdb4d',
+  },
+});
+
+const Prev = glamorous.span({
+  position: 'absolute',
+  top: '50%',
+  width: 'auto',
+  left: '0',
+  marginTop: '-22px',
+  padding: '10px',
+  color: '#000',
+  fontWeight: 'bold',
+  fontSize: '18px',
+  transition: '0.6s ease',
+  borderRadius: '3px 0 0 3px',
+
+  cursor: 'pointer',
+  ':hover,:active,:focus': {
+    backgroundColor: '#ffdb4d',
+  },
 });
 
 const Modal = (props) => {
@@ -39,9 +76,9 @@ const Modal = (props) => {
     return (
       <React.Fragment>
         <Window>
-          <div>
-            <CloseButton onClick={props.onClose}>&times;</CloseButton>
-          </div>
+          <CloseButton onClick={props.onClose}>&times;</CloseButton>
+          <Next onClick={props.onNext}>&#10095;</Next>
+          <Prev onClick={props.onPrevious}>&#10094;</Prev>
           {props.children}
         </Window>
         <Backdrop onClick={props.onClose} />
