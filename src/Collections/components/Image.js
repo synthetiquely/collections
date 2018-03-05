@@ -6,6 +6,9 @@ const View = glamorous.div(
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    ':hover': {
+      boxShadow: '1px 1px 1px 1px #ccc',
+    },
   },
   ({ orientation }) => {
     if (orientation === 'landscape') {
@@ -31,7 +34,7 @@ const Image = glamorous.img({
 });
 
 export default props => (
-  <View orientation={props.orientation}>
+  <View orientation={props.orientation} onClick={props.onClick}>
     <Image src={props.src} alt={props.title} />
   </View>
 );
