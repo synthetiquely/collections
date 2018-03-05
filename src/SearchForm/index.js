@@ -19,7 +19,7 @@ const Form = glamorous.form({
 });
 
 const Input = glamorous.input({
-  minWidth: '100%',
+  width: '100%',
   padding: '10px',
   fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
   fontSize: '16px',
