@@ -1,30 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
 
-class SearchForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: '',
-      loading: false,
-      error: null,
-    };
-  }
-
-  render() {
-    return (
-      <Form>
-        <Input
-          type="text"
-          id="search"
-          name="search"
-          placeholder="Поиск по коллекциям"
-        />
-        <Button type="submit">Найти</Button>
-      </Form>
-    );
-  }
-}
+const SearchForm = () => (
+  <Form>
+    <Input
+      type="text"
+      id="search"
+      name="search"
+      placeholder="Поиск по коллекциям"
+    />
+    <Button type="submit">Найти</Button>
+  </Form>
+);
 
 const Form = glamorous.form({
   display: 'flex',
