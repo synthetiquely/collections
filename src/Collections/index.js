@@ -132,7 +132,7 @@ const Views = glamorous.section(
   {
     display: 'grid',
     gridGap: '10px',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
     gridAutoRows: '75px',
     gridAutoFlow: 'dense',
     padding: '10px',

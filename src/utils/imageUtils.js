@@ -1,3 +1,8 @@
+/**
+ * Find out orientation of a given image
+ * @param {string} src - souce of an image
+ * @returns {Promise<string>} - orientation could be: 'landscape' | 'portrait' | 'even';
+ */
 const calculateImageOrientation = (src) => {
   let orientation;
   let img = new Image();

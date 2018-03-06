@@ -34,4 +34,16 @@ export default [
       'http://cdn2.arhivurokov.ru/viewImage.php?image=http://img0.liveinternet.ru/images/attach/d/0/138/501/138501004_132018492_tumblr_n3nvvjICtT1tv66qwo1_1280.jpg',
     title: 'A kitty with a cup of coffee',
   },
+  {
+    id: '7',
+    src:
+      'https://images.900.tw/upload_file/29/content/1605da67-566f-298e-207f-271807955f6e.jpg',
+    title: 'A kitty with a cup of coffee',
+  },
+  {
+    id: '8',
+    src:
+      'http://theplaidzebra.com/wp-content/uploads/2014/11/1_Cat-Cafe_The-Plaid-Zebrajpg.jpg',
+    title: 'A kitty with a cup of coffee',
+  },
 ];
