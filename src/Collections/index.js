@@ -23,7 +23,9 @@ class Collections extends Component {
     });
   }
 
-  onNext() {
+  onNext(e) {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     if (api[this.state.selected + 1]) {
       this.setState(prevState => ({
         selected: prevState.selected + 1,
@@ -35,7 +37,9 @@ class Collections extends Component {
     }
   }
 
-  onPrevious() {
+  onPrevious(e) {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     if (api[this.state.selected - 1]) {
       this.setState(prevState => ({
         selected: prevState.selected - 1,
@@ -47,7 +51,9 @@ class Collections extends Component {
     }
   }
 
-  onClose() {
+  onClose(e) {
+    console.log('Closed', e.target);
+
     this.setState({
       selected: null,
     });
@@ -76,7 +82,7 @@ class Collections extends Component {
   render() {
     const { selected } = this.state;
     return (
-      <Views>
+      <Views isOpen={selected !== null}>
         {this.renderItems()}
         {selected !== null && (
           <ImagePreview
@@ -94,13 +100,18 @@ class Collections extends Component {
   }
 }
 
-const Views = glamorous.section({
-  display: 'grid',
-  gridGap: '10px',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-  gridAutoRows: '75px',
-  gridAutoFlow: 'dense',
-  padding: '10px',
-});
+const Views = glamorous.section(
+  {
+    display: 'grid',
+    gridGap: '10px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+    gridAutoRows: '75px',
+    gridAutoFlow: 'dense',
+    padding: '10px',
+  },
+  ({ isOpen }) => ({
+    overflowY: isOpen ? 'hidden' : 'auto',
+  }),
+);
 
 export default Collections;

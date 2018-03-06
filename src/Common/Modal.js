@@ -2,26 +2,34 @@ import React from 'react';
 import glamorous from 'glamorous';
 
 const Backdrop = glamorous.div({
-  position: 'absolute',
+  position: 'fixed',
+  display: 'flex',
   width: '100%',
   height: '100%',
   top: '0px',
   left: '0px',
-  zIndex: '9998',
+  zIndex: '1',
   backgroundColor: 'rgba(0,0,0,0.6)',
 });
 
 const Window = glamorous.div({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  zIndex: '9999',
+  width: '80vh',
+  height: '80vh',
+  zIndex: '2',
   padding: '30px',
   display: 'flex',
+  margin: 'auto',
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: '#f6f5f3',
-  transform: 'translate(-50%, -50%)',
+  '@media only screen and (max-width: 1024px) and (orientation: portrait)': {
+    width: '80vw',
+    height: '80vw',
+  },
+  '@media only screen and (max-width: 1024px) and (orientation: landscape)': {
+    width: '80vh',
+    height: '80vh',
+  },
 });
 
 const CloseButton = glamorous.span({
@@ -34,40 +42,57 @@ const CloseButton = glamorous.span({
   cursor: 'pointer',
 });
 
-const Next = glamorous.span({
+const Next = glamorous.div({
+  zIndex: '3',
   position: 'absolute',
   top: '50%',
   right: '0',
   width: 'auto',
   marginTop: '-22px',
   padding: '10px',
-  color: '#000',
+  color: '#fff',
   fontWeight: 'bold',
-  fontSize: '18px',
+  fontSize: '20px',
   transition: '0.6s ease',
   borderRadius: '0 3px 3px 0',
   cursor: 'pointer',
   ':hover,:active,:focus': {
     backgroundColor: '#ffdb4d',
+    color: '#000',
+  },
+  '@media only screen and (max-width: 500px) and (orientation: portrait)': {
+    top: '90%',
+    right: '48%',
+    margin: '0',
+    padding: '5px',
+    transform: 'rotateZ(90deg)',
   },
 });
 
-const Prev = glamorous.span({
+const Prev = glamorous.div({
+  zIndex: '3',
   position: 'absolute',
   top: '50%',
   width: 'auto',
   left: '0',
   marginTop: '-22px',
   padding: '10px',
-  color: '#000',
+  color: '#fff',
   fontWeight: 'bold',
-  fontSize: '18px',
+  fontSize: '20px',
   transition: '0.6s ease',
   borderRadius: '3px 0 0 3px',
-
   cursor: 'pointer',
   ':hover,:active,:focus': {
     backgroundColor: '#ffdb4d',
+    color: '#000',
+  },
+  '@media only screen and (max-width: 500px) and (orientation: portrait)': {
+    top: '0',
+    left: '49%',
+    margin: '0',
+    padding: '5px',
+    transform: 'rotateZ(90deg)',
   },
 });
 
@@ -75,13 +100,14 @@ const Modal = (props) => {
   if (props.isOpen) {
     return (
       <React.Fragment>
-        <Window>
-          <CloseButton onClick={props.onClose}>&times;</CloseButton>
-          <Next onClick={props.onNext}>&#10095;</Next>
-          <Prev onClick={props.onPrevious}>&#10094;</Prev>
-          {props.children}
-        </Window>
-        <Backdrop onClick={props.onClose} />
+        <Backdrop onClick={props.onClose}>
+          <Window>
+            <CloseButton onClick={props.onClose}>&times;</CloseButton>
+            <Next onClick={props.onNext}>&#10095;</Next>
+            <Prev onClick={props.onPrevious}>&#10094;</Prev>
+            {props.children}
+          </Window>
+        </Backdrop>
       </React.Fragment>
     );
   }
