@@ -62,7 +62,8 @@ const Next = glamorous.div({
   },
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '90%',
-    right: '48%',
+    right: '50%',
+    left: '50%',
     margin: '0',
     padding: '5px',
     transform: 'rotateZ(90deg)',
@@ -89,7 +90,7 @@ const Prev = glamorous.div({
   },
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '0',
-    left: '49%',
+    left: '50%',
     margin: '0',
     padding: '5px',
     transform: 'rotateZ(90deg)',
