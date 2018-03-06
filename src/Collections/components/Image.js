@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
 const View = glamorous.div(
@@ -28,14 +28,53 @@ const View = glamorous.div(
   },
 );
 
-const Image = glamorous.img({
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-});
-
-export default props => (
-  <View orientation={props.orientation} onClick={props.onClick}>
-    <Image src={props.src} alt={props.title} />
-  </View>
+const Img = glamorous.img(
+  {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  ({ imageLoaded }) => {
+    if (!imageLoaded) {
+      return {
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: 'linear-gradient(to right, #ffdb4d, #ffe78c)',
+        backgroundSize: '100%, 100%',
+        backgroundPosition: '0 0',
+      };
+    }
+    return {};
+  },
 );
+
+export default class Image extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageLoaded: false,
+    };
+  }
+
+  onLoad(status) {
+    this.setState({
+      imageLoaded: status,
+    });
+  }
+
+  render() {
+    const {
+      title, src, orientation, onClick,
+    } = this.props;
+
+    return (
+      <View orientation={orientation} onClick={onClick}>
+        <Img
+          onLoad={() => this.onLoad(true)}
+          src={src}
+          alt={title}
+          imageLoaded={this.state.imageLoaded}
+        />
+      </View>
+    );
+  }
+}
