@@ -57,8 +57,7 @@ const Next = glamorous.div({
   borderRadius: '0 3px 3px 0',
   cursor: 'pointer',
   ':hover,:active,:focus': {
-    backgroundColor: '#ffdb4d',
-    color: '#000',
+    fontSize: '25px',
   },
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '90%',
@@ -85,8 +84,7 @@ const Prev = glamorous.div({
   borderRadius: '3px 0 0 3px',
   cursor: 'pointer',
   ':hover,:active,:focus': {
-    backgroundColor: '#ffdb4d',
-    color: '#000',
+    fontSize: '25px',
   },
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '0',

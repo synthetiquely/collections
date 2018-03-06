@@ -33,7 +33,6 @@ class Collections extends Component {
   }
 
   onKeyDown(e) {
-    e.preventDefault();
     if (this.state.selected !== null && e.keyCode) {
       switch (e.keyCode) {
         case 37:
