@@ -15,6 +15,15 @@ class Collections extends Component {
     this.onClose = this.onClose.bind(this);
     this.onNext = this.onNext.bind(this);
     this.onPrevious = this.onPrevious.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onClick(index) {
@@ -23,9 +32,28 @@ class Collections extends Component {
     });
   }
 
+  onKeyDown(e) {
+    e.preventDefault();
+    if (this.state.selected !== null && e.keyCode) {
+      switch (e.keyCode) {
+        case 37:
+          this.onPrevious();
+          break;
+        case 39:
+          this.onNext();
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
   onNext(e) {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
+    if (e) {
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+    }
+
     if (api[this.state.selected + 1]) {
       this.setState(prevState => ({
         selected: prevState.selected + 1,
@@ -38,8 +66,11 @@ class Collections extends Component {
   }
 
   onPrevious(e) {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
+    if (e) {
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+    }
+
     if (api[this.state.selected - 1]) {
       this.setState(prevState => ({
         selected: prevState.selected - 1,
@@ -51,9 +82,7 @@ class Collections extends Component {
     }
   }
 
-  onClose(e) {
-    console.log('Closed', e.target);
-
+  onClose() {
     this.setState({
       selected: null,
     });
