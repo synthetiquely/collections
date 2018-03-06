@@ -1,0 +1,23 @@
+sudo enabled
+language: node_js
+node_js:
+- '9'
+cache: yarn
+branches:
+  only:
+    - master
+install:
+- yarn
+script:
+- yarn lint
+after_sucess:
+- yarn build
+before_deploy:
+- echo "Initializing deployment..."
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master

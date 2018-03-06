@@ -15,7 +15,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.j*",
-    "prettier": "prettier --list-different --config ./.prettierrc ./src/**/*.j*"
+    "prettier": "prettier --write --config ./.prettierrc ./src/**/*.j*"
   },
   "devDependencies": {
     "eslint": "4.9.0",
