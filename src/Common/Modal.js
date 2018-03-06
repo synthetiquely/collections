@@ -40,6 +40,7 @@ const CloseButton = glamorous.span({
   fontSize: '28px',
   fontWeight: 'bold',
   cursor: 'pointer',
+  userSelect: 'none',
 });
 
 const Next = glamorous.div({
@@ -59,6 +60,7 @@ const Next = glamorous.div({
   ':hover,:active,:focus': {
     fontSize: '25px',
   },
+  userSelect: 'none',
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '90%',
     right: '50%',
@@ -86,6 +88,7 @@ const Prev = glamorous.div({
   ':hover,:active,:focus': {
     fontSize: '25px',
   },
+  userSelect: 'none',
   '@media only screen and (max-width: 500px) and (orientation: portrait)': {
     top: '0',
     left: '50%',

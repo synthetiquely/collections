@@ -37,7 +37,7 @@ export default [
   {
     id: '7',
     src:
-      'https://images.900.tw/upload_file/29/content/1605da67-566f-298e-207f-271807955f6e.jpg',
+      'http://sprudge.com/wp-content/uploads/2016/07/Sprudge-KittiesNCoffee-AnnaBrones-13398803_1752284231723677_958695649_n.jpg',
     title: 'A kitty with a cup of coffee',
   },
   {
