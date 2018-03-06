@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-const View = glamorous.div(
+const Container = glamorous.div(
   {
     display: 'flex',
     justifyContent: 'center',
@@ -47,7 +47,7 @@ const Img = glamorous.img(
   },
 );
 
-export default class Image extends Component {
+export default class View extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,14 +67,14 @@ export default class Image extends Component {
     } = this.props;
 
     return (
-      <View orientation={orientation} onClick={onClick}>
+      <Container orientation={orientation} onClick={onClick}>
         <Img
           onLoad={() => this.onLoad(true)}
           src={src}
           alt={title}
           imageLoaded={this.state.imageLoaded}
         />
-      </View>
+      </Container>
     );
   }
 }

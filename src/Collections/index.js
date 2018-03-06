@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-import ImagePreview from './components/ImagePreview';
-import Image from './components/Image';
+import Preview from './components/Preview';
+import View from './components/View';
 import api from './api';
 // import calculateImageOrientation from '../utils/imageUtils';
 
@@ -96,7 +96,7 @@ class Collections extends Component {
         //   orientation: calculateImageOrientation(item.src),
         // }))
         .map((item, index) => (
-          <Image
+          <View
             src={item.src}
             title={item.title}
             orientation={item.orientation || 'even'}
@@ -113,7 +113,7 @@ class Collections extends Component {
       <Views isOpen={selected !== null}>
         {this.renderItems()}
         {selected !== null && (
-          <ImagePreview
+          <Preview
             isOpen={selected !== null}
             src={api[selected].src}
             id={api[selected].id}
