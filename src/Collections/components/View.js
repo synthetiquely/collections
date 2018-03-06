@@ -4,10 +4,11 @@ import glamorous from 'glamorous';
 const Container = glamorous.div(
   {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     ':hover': {
-      boxShadow: '1px 1px 1px 1px #ccc',
+      boxShadow: '1px 1px 1px #ccc',
     },
     cursor: 'pointer',
   },
@@ -28,7 +29,7 @@ const Container = glamorous.div(
   },
 );
 
-const Img = glamorous.img(
+const Image = glamorous.img(
   {
     width: '100%',
     height: '100%',
@@ -46,7 +47,6 @@ const Img = glamorous.img(
     return {};
   },
 );
-
 export default class View extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +68,7 @@ export default class View extends Component {
 
     return (
       <Container orientation={orientation} onClick={onClick}>
-        <Img
+        <Image
           onLoad={() => this.onLoad(true)}
           src={src}
           alt={title}
