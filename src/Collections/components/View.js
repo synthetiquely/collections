@@ -22,7 +22,7 @@ const Container = glamorous.div(
   },
 );
 
-const Icon = glamorous.i(
+const Divider = glamorous.i(
   {
     display: 'block',
   },
@@ -65,7 +65,7 @@ export default class View extends Component {
     const { src, title, onClick } = this.props;
     return (
       <Container onClick={onClick} width={width} height={height}>
-        <Icon width={width} height={height} />
+        <Divider width={width} height={height} />
         <img
           src={src}
           alt={title}
