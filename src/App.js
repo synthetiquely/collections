@@ -5,12 +5,14 @@ import Layout from './Common/Layout';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
 import SearchForm from './SearchForm';
+import LayoutSwitcher from './LayoutSwitcher';
 import Collections from './Collections';
 
 const App = () => (
   <Layout>
     <Header>
       <SearchForm />
+      <LayoutSwitcher />
     </Header>
     <Container>
       <Collections />

@@ -3,45 +3,51 @@ import glamorous from 'glamorous';
 
 const Container = glamorous.div(
   {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    cursor: 'pointer',
     ':hover': {
       boxShadow: '1px 1px 1px #ccc',
     },
-    cursor: 'pointer',
   },
-  ({ orientation }) => {
-    if (orientation === 'landscape') {
+  ({ layout }) => {
+    if (layout === 'google') {
+      return {
+        flexGrow: '1',
+        maxHeight: '300px',
+        margin: '2.5px',
+      };
+    } else if (layout === 'instagram') {
       return {
         gridColumn: 'span 2',
-      };
-    } else if (orientation === 'portrait') {
-      return {
         gridRow: 'span 2',
       };
     }
-    return {
-      gridColumn: 'span 2',
-      gridRow: 'span 2',
-    };
+    return {};
   },
 );
 
 const Image = glamorous.img(
   {
-    width: '100%',
-    height: '100%',
     objectFit: 'cover',
   },
-  ({ imageLoaded }) => {
+  ({ imageLoaded, layout }) => {
     if (!imageLoaded) {
       return {
         backgroundRepeat: 'no-repeat',
         backgroundImage: 'linear-gradient(to right, #ffdb4d, #ffe78c)',
         backgroundSize: '100%, 100%',
         backgroundPosition: '0 0',
+      };
+    }
+    if (layout === 'google') {
+      return {
+        maxWidth: '100%',
+        minWidth: '100%',
+        maxHeight: '300px',
+      };
+    } else if (layout === 'instagram') {
+      return {
+        width: '100%',
+        height: '100%',
       };
     }
     return {};
@@ -63,16 +69,17 @@ export default class View extends Component {
 
   render() {
     const {
-      title, src, orientation, onClick,
+      title, src, onClick, layout,
     } = this.props;
 
     return (
-      <Container orientation={orientation} onClick={onClick}>
+      <Container layout={layout} onClick={onClick}>
         <Image
           onLoad={() => this.onLoad(true)}
           src={src}
           alt={title}
           imageLoaded={this.state.imageLoaded}
+          layout={layout}
         />
       </Container>
     );
