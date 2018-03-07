@@ -99,7 +99,7 @@ class Collections extends Component {
           <View
             src={item.src}
             title={item.title}
-            orientation={item.orientation || 'even'}
+            size={item.size || 'default'}
             key={item.id}
             onClick={() => this.onClick(index)}
           />
@@ -133,7 +133,7 @@ const Views = glamorous.section(
     display: 'grid',
     gridGap: '10px',
     gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-    gridAutoRows: '75px',
+    gridAutoRows: 'minmax(150px, auto)',
     gridAutoFlow: 'dense',
     padding: '10px',
   },
