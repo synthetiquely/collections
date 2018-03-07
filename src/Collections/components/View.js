@@ -1,58 +1,82 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-const Container = glamorous.div({
-  flexGrow: '1',
-  maxHeight: '300px',
-  margin: '2.5px',
-  ':hover': {
-    boxShadow: '1px 1px 1px #ccc',
-  },
-  cursor: 'pointer',
-});
-
-const Image = glamorous.img(
+const Container = glamorous.div(
   {
-    maxWidth: '100%',
-    minWidth: '100%',
-    maxHeight: '300px',
+    position: 'relative',
+    margin: '2.5px',
+    cursor: 'pointer',
+    ':hover': {
+      boxShadow: '1px 1px 1px #ccc',
+    },
   },
-  ({ imageLoaded }) => {
-    if (!imageLoaded) {
+  ({ height, width }) => {
+    if (height && width) {
+      const size = width * 200 / height;
       return {
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: 'linear-gradient(to right, #ffdb4d, #ffe78c)',
-        backgroundSize: '100%, 100%',
-        backgroundPosition: '0 0',
+        flexGrow: `${size}`,
+        width: `${size}px`,
       };
     }
     return {};
   },
 );
+
+const Icon = glamorous.i(
+  {
+    display: 'block',
+  },
+  ({ height, width }) => {
+    if (height && width) {
+      const size = height / width * 100;
+      return {
+        paddingBottom: `${size}%`,
+      };
+    }
+    return {};
+  },
+);
+
 export default class View extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageLoaded: false,
+      width: 0,
+      height: 0,
     };
+    this.img = null;
+    this.onLoad = this.onLoad.bind(this);
+    this.setRef = this.setRef.bind(this);
   }
 
-  onLoad(status) {
+  onLoad() {
     this.setState({
-      imageLoaded: status,
+      width: this.img.naturalWidth || this.img.width,
+      height: this.img.naturalHeight || this.img.height,
     });
   }
 
-  render() {
-    const { title, src, onClick } = this.props;
+  setRef(img) {
+    this.img = img;
+  }
 
+  render() {
+    const { width, height } = this.state;
+    const { src, title, onClick } = this.props;
     return (
-      <Container onClick={onClick}>
-        <Image
+      <Container onClick={onClick} width={width} height={height}>
+        <Icon width={width} height={height} />
+        <img
           src={src}
           alt={title}
-          onLoad={() => this.onLoad(true)}
-          imageLoaded={this.state.imageLoaded}
+          ref={this.setRef}
+          onLoad={this.onLoad}
+          style={{
+            position: 'absolute',
+            top: '0',
+            width: '100%',
+            verticalAlign: 'bottom',
+          }}
         />
       </Container>
     );
