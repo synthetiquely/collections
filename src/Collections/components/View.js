@@ -1,38 +1,21 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-const Container = glamorous.div(
-  {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ':hover': {
-      boxShadow: '1px 1px 1px #ccc',
-    },
-    cursor: 'pointer',
+const Container = glamorous.div({
+  flexGrow: '1',
+  maxHeight: '300px',
+  margin: '2.5px',
+  cursor: 'pointer',
+  ':hover': {
+    boxShadow: '1px 1px 1px #ccc',
   },
-  ({ orientation }) => {
-    if (orientation === 'landscape') {
-      return {
-        gridColumn: 'span 2',
-      };
-    } else if (orientation === 'portrait') {
-      return {
-        gridRow: 'span 2',
-      };
-    }
-    return {
-      gridColumn: 'span 2',
-      gridRow: 'span 2',
-    };
-  },
-);
+});
 
 const Image = glamorous.img(
   {
-    width: '100%',
-    height: '100%',
+    maxWidth: '100%',
+    minWidth: '100%',
+    maxHeight: '300px',
     objectFit: 'cover',
   },
   ({ imageLoaded }) => {
