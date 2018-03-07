@@ -5,7 +5,7 @@ class LayoutSwitcher extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: 'instagram',
+      active: 'google',
     };
     this.onSelectLayout = this.onSelectLayout.bind(this);
   }
@@ -64,6 +64,8 @@ const Form = glamorous.form({
 
 const Switch = glamorous.button(
   {
+    width: '24px',
+    height: '24px',
     border: 'none',
     backgroundColor: '#fff',
     cursor: 'pointer',

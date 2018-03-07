@@ -4,7 +4,6 @@ import glamorous from 'glamorous';
 import Preview from './components/Preview';
 import View from './components/View';
 import api from './api';
-// import calculateImageOrientation from '../utils/imageUtils';
 
 class Collections extends Component {
   constructor(props) {
@@ -88,29 +87,21 @@ class Collections extends Component {
   }
 
   renderItems() {
-    // @FIXME: Refactor transofrmation pipeline with rxJS when redux will be available
-    return (
-      api
-        // .map(item => ({
-        //   ...item,
-        //   orientation: calculateImageOrientation(item.src),
-        // }))
-        .map((item, index) => (
-          <View
-            src={item.src}
-            title={item.title}
-            orientation={item.orientation || 'even'}
-            key={item.id}
-            onClick={() => this.onClick(index)}
-          />
-        ))
-    );
+    return api.map((item, index) => (
+      <View
+        src={item.src}
+        title={item.title}
+        key={item.id}
+        layout="google"
+        onClick={() => this.onClick(index)}
+      />
+    ));
   }
 
   render() {
     const { selected } = this.state;
     return (
-      <Views isOpen={selected !== null}>
+      <Views isOpen={selected !== null} layout="google">
         {this.renderItems()}
         {selected !== null && (
           <Preview
@@ -128,18 +119,29 @@ class Collections extends Component {
   }
 }
 
-const Views = glamorous.section(
-  {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&::after': {
-      content: '\'\'',
-      flexGrow: '999999999',
-    },
-  },
-  ({ isOpen }) => ({
-    overflowY: isOpen ? 'hidden' : 'auto',
-  }),
-);
+const Views = glamorous.section({}, ({ isOpen, layout }) => {
+  if (layout === 'google') {
+    return {
+      display: 'flex',
+      flexWrap: 'wrap',
+      overflowY: isOpen ? 'hidden' : 'auto',
+      '&::after': {
+        content: "''",
+        flexGrow: '999999999',
+      },
+    };
+  } else if (layout === 'instagram') {
+    return {
+      display: 'grid',
+      gridGap: '10px',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+      gridAutoRows: '75px',
+      gridAutoFlow: 'dense',
+      padding: '10px',
+      overflowY: isOpen ? 'hidden' : 'auto',
+    };
+  }
+  return {};
+});
 
 export default Collections;
