@@ -4,7 +4,6 @@ import glamorous from 'glamorous';
 import Preview from './components/Preview';
 import View from './components/View';
 import api from './api';
-// import calculateImageOrientation from '../utils/imageUtils';
 
 class Collections extends Component {
   constructor(props) {
@@ -88,23 +87,14 @@ class Collections extends Component {
   }
 
   renderItems() {
-    // @FIXME: Refactor transofrmation pipeline with rxJS when redux will be available
-    return (
-      api
-        // .map(item => ({
-        //   ...item,
-        //   orientation: calculateImageOrientation(item.src),
-        // }))
-        .map((item, index) => (
-          <View
-            src={item.src}
-            title={item.title}
-            size={item.size || 'default'}
-            key={item.id}
-            onClick={() => this.onClick(index)}
-          />
-        ))
-    );
+    return api.map((item, index) => (
+      <View
+        src={item.src}
+        title={item.title}
+        key={item.id}
+        onClick={() => this.onClick(index)}
+      />
+    ));
   }
 
   render() {
@@ -130,12 +120,12 @@ class Collections extends Component {
 
 const Views = glamorous.section(
   {
-    display: 'grid',
-    gridGap: '10px',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-    gridAutoRows: 'minmax(150px, auto)',
-    gridAutoFlow: 'dense',
-    padding: '10px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    '&::after': {
+      content: "''",
+      flexGrow: '999999999',
+    },
   },
   ({ isOpen }) => ({
     overflowY: isOpen ? 'hidden' : 'auto',
