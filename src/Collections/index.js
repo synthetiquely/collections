@@ -122,9 +122,11 @@ const Views = glamorous.section(
   {
     display: 'flex',
     flexWrap: 'wrap',
-    '&::after': {
-      content: "''",
-      flexGrow: '999999999',
+    '@media only screen and (min-width: 768px)': {
+      '&::after': {
+        content: "''",
+        flexGrow: '999999999',
+      },
     },
   },
   ({ isOpen }) => ({
