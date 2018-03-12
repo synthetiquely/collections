@@ -13,8 +13,7 @@ class Collections extends Component {
       selected: null,
     };
     this.onClose = this.onClose.bind(this);
-    this.onNext = this.onNext.bind(this);
-    this.onPrevious = this.onPrevious.bind(this);
+    this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
   }
 
@@ -36,46 +35,41 @@ class Collections extends Component {
     if (this.state.selected !== null && e.keyCode) {
       switch (e.keyCode) {
         case constants.KEY_ARROW_LEFT:
-          this.onPrevious();
+          this.onChangeSelected(null, constants.DESTINATION_PREVIOUS);
           break;
         case constants.KEY_ARROW_RIGHT:
-          this.onNext();
+          this.onChangeSelected(null, constants.DESTINATION_NEXT);
           break;
       }
     }
   }
 
-  onNext(e) {
+  onChangeSelected(e, destination) {
     if (e) {
       e.stopPropagation();
       e.nativeEvent.stopImmediatePropagation();
     }
 
-    if (api[this.state.selected + 1]) {
-      this.setState(prevState => ({
-        selected: prevState.selected + 1,
-      }));
-    } else {
-      this.setState({
-        selected: 0,
-      });
-    }
-  }
-
-  onPrevious(e) {
-    if (e) {
-      e.stopPropagation();
-      e.nativeEvent.stopImmediatePropagation();
-    }
-
-    if (api[this.state.selected - 1]) {
-      this.setState(prevState => ({
-        selected: prevState.selected - 1,
-      }));
-    } else {
-      this.setState({
-        selected: api.length - 1,
-      });
+    if (destination === constants.DESTINATION_NEXT) {
+      if (api[this.state.selected + 1]) {
+        this.setState(prevState => ({
+          selected: prevState.selected + 1,
+        }));
+      } else {
+        this.setState({
+          selected: 0,
+        });
+      }
+    } else if (destination === constants.DESTINATION_PREVIOUS) {
+      if (api[this.state.selected - 1]) {
+        this.setState(prevState => ({
+          selected: prevState.selected - 1,
+        }));
+      } else {
+        this.setState({
+          selected: api.length - 1,
+        });
+      }
     }
   }
 
@@ -108,8 +102,7 @@ class Collections extends Component {
             id={api[selected].id}
             title={api[selected].title}
             onClose={this.onClose}
-            onNext={this.onNext}
-            onPrevious={this.onPrevious}
+            onChangeSelected={this.onChangeSelected}
           />
         )}
       </Views>

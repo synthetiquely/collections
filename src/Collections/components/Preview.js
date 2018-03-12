@@ -13,8 +13,7 @@ export default props => (
   <Modal
     isOpen={props.isOpen}
     onClose={props.onClose}
-    onNext={props.onNext}
-    onPrevious={props.onPrevious}
+    onChangeSelected={props.onChangeSelected}
   >
     <Image src={props.src} alt={props.title} />
   </Modal>

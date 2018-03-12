@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import * as constants from '../constants';
 
 const Backdrop = glamorous.div({
   position: 'fixed',
@@ -101,16 +102,24 @@ const Prev = glamorous.div({
 const Modal = (props) => {
   if (props.isOpen) {
     return (
-      <React.Fragment>
-        <Backdrop onClick={props.onClose}>
-          <Window>
-            <CloseButton onClick={props.onClose}>&times;</CloseButton>
-            <Next onClick={props.onNext}>&#10095;</Next>
-            <Prev onClick={props.onPrevious}>&#10094;</Prev>
-            {props.children}
-          </Window>
-        </Backdrop>
-      </React.Fragment>
+      <Backdrop onClick={props.onClose}>
+        <Window>
+          <CloseButton onClick={props.onClose}>&times;</CloseButton>
+          <Next
+            onClick={e => props.onChangeSelected(e, constants.DESTINATION_NEXT)}
+          >
+            &#10095;
+          </Next>
+          <Prev
+            onClick={e =>
+              props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)
+            }
+          >
+            &#10094;
+          </Prev>
+          {props.children}
+        </Window>
+      </Backdrop>
     );
   }
   return null;
