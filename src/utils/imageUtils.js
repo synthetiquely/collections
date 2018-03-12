@@ -3,7 +3,7 @@
  * @param {string} src - souce of an image
  * @returns {Promise<string>} - orientation could be: 'landscape' | 'portrait' | 'even';
  */
-const calculateImageOrientation = (src) => {
+export const calculateImageOrientation = (src) => {
   let orientation;
   let img = new Image();
 
@@ -25,4 +25,21 @@ const calculateImageOrientation = (src) => {
   });
 };
 
-export default calculateImageOrientation;
+/**
+ * Given a DOM element, searches it for <img> tags and checks if all of them
+ * have finished loading or not.
+ * @param {HTMLElement} parentNode
+ * @returns {Boolean}
+ */
+export const imagesLoaded = (parentNode) => {
+  const imgs = parentNode.querySelectorAll('img');
+  let isLoaded = true;
+
+  for (let i = 0; i < imgs.length; i += 1) {
+    if (!imgs[i].complete) {
+      isLoaded = false;
+    }
+  }
+
+  return isLoaded;
+};

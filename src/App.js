@@ -3,11 +3,11 @@ import glamorous from 'glamorous';
 
 import api from './api';
 
-import Layout from './Common/Layout';
-import Header from './Common/Header';
-import Footer from './Common/Footer';
-import SearchForm from './SearchForm';
-import Collections from './Collections';
+import Layout from './components/Layout/Layout';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import SearchForm from './components/SearchForm/SearchForm';
+import Collections from './components/Collections/Collections';
 
 const App = () => (
   <Layout>

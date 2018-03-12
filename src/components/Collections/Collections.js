@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-import Preview from './components/Preview';
-import View from './components/View';
-import * as constants from '../constants';
+import Preview from '../Preview/Preview';
+import View from '../View/View';
+import Spinner from '../styled/Spinner';
+import * as constants from '../../constants';
+import { imagesLoaded } from '../../utils/imageUtils';
 
 class Collections extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: null,
+      loading: true,
     };
+    this.galleryElement = null;
     this.onClose = this.onClose.bind(this);
+    this.onChangeLoading = this.onChangeLoading.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.setRef = this.setRef.bind(this);
   }
 
   componentDidMount() {
@@ -73,10 +79,29 @@ class Collections extends Component {
     }
   }
 
+  onChangeLoading() {
+    const isLoaded = !imagesLoaded(this.galleryElement);
+
+    this.setState({
+      loading: isLoaded,
+    });
+  }
+
   onClose() {
     this.setState({
       selected: null,
     });
+  }
+
+  setRef(element) {
+    this.galleryElement = element;
+  }
+
+  renderSpinner() {
+    if (!this.state.loading) {
+      return null;
+    }
+    return <Spinner />;
   }
 
   renderItems() {
@@ -86,6 +111,7 @@ class Collections extends Component {
         title={item.title}
         key={item.id}
         onClick={() => this.onClick(index)}
+        onChangeLoading={this.onChangeLoading}
       />
     ));
   }
@@ -95,7 +121,8 @@ class Collections extends Component {
     const { images } = this.props;
 
     return (
-      <Views isOpen={selected !== null}>
+      <Views innerRef={this.setRef} isOpen={selected !== null}>
+        {this.renderSpinner()}
         {this.renderItems()}
         {selected !== null && (
           <Preview

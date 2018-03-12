@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import Link from '../styled/Link';
 
 const Footer = glamorous.footer({
   gridArea: 'footer',
@@ -26,11 +27,3 @@ export default () => (
     </Paragraph>
   </Footer>
 );
-
-const Link = glamorous.a({
-  color: '#a9a9a9',
-  textDecoration: 'none',
-  ':hover,:active,:focus': {
-    color: '#ffdb4d',
-  },
-});

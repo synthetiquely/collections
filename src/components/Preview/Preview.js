@@ -1,7 +1,7 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
-import Modal from '../../Common/Modal';
+import Modal from '../Modal/Modal';
 
 const Image = glamorous.img({
   width: '100%',
