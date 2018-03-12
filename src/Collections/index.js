@@ -4,7 +4,6 @@ import glamorous from 'glamorous';
 import Preview from './components/Preview';
 import View from './components/View';
 import * as constants from '../constants';
-import api from './api';
 
 class Collections extends Component {
   constructor(props) {
@@ -50,8 +49,9 @@ class Collections extends Component {
       e.nativeEvent.stopImmediatePropagation();
     }
 
+    const { images } = this.props;
     if (destination === constants.DESTINATION_NEXT) {
-      if (api[this.state.selected + 1]) {
+      if (images[this.state.selected + 1]) {
         this.setState(prevState => ({
           selected: prevState.selected + 1,
         }));
@@ -61,13 +61,13 @@ class Collections extends Component {
         });
       }
     } else if (destination === constants.DESTINATION_PREVIOUS) {
-      if (api[this.state.selected - 1]) {
+      if (images[this.state.selected - 1]) {
         this.setState(prevState => ({
           selected: prevState.selected - 1,
         }));
       } else {
         this.setState({
-          selected: api.length - 1,
+          selected: images.length - 1,
         });
       }
     }
@@ -80,7 +80,7 @@ class Collections extends Component {
   }
 
   renderItems() {
-    return api.map((item, index) => (
+    return this.props.images.map((item, index) => (
       <View
         src={item.src}
         title={item.title}
@@ -92,15 +92,17 @@ class Collections extends Component {
 
   render() {
     const { selected } = this.state;
+    const { images } = this.props;
+
     return (
       <Views isOpen={selected !== null}>
         {this.renderItems()}
         {selected !== null && (
           <Preview
             isOpen={selected !== null}
-            src={api[selected].src}
-            id={api[selected].id}
-            title={api[selected].title}
+            src={images[selected].src}
+            id={images[selected].id}
+            title={images[selected].title}
             onClose={this.onClose}
             onChangeSelected={this.onChangeSelected}
           />

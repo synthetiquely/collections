@@ -1,6 +1,8 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
+import api from './api';
+
 import Layout from './Common/Layout';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
@@ -13,7 +15,7 @@ const App = () => (
       <SearchForm />
     </Header>
     <Container>
-      <Collections />
+      <Collections images={api} />
     </Container>
     <Footer />
   </Layout>
