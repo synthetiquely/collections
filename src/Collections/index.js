@@ -41,8 +41,6 @@ class Collections extends Component {
         case constants.KEY_ARROW_RIGHT:
           this.onNext();
           break;
-        default:
-          break;
       }
     }
   }
