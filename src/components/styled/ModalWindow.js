@@ -11,12 +11,15 @@ const ModalWindow = glamorous.div({
   alignItems: 'center',
   backgroundColor: '#f6f5f3',
   '@media only screen and (max-width: 1024px) and (orientation: portrait)': {
-    width: '80vw',
-    height: '80vw',
+    width: '90vw',
+    height: '90vw',
   },
   '@media only screen and (max-width: 1024px) and (orientation: landscape)': {
-    width: '80vh',
-    height: '80vh',
+    width: '90vh',
+    height: '90vh',
+  },
+  '@media only screen and (max-width: 1024px)': {
+    padding: '10px',
   },
 });
 
