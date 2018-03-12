@@ -3,6 +3,7 @@ import glamorous from 'glamorous';
 
 import Preview from './components/Preview';
 import View from './components/View';
+import * as constants from '../constants';
 import api from './api';
 
 class Collections extends Component {
@@ -34,10 +35,10 @@ class Collections extends Component {
   onKeyDown(e) {
     if (this.state.selected !== null && e.keyCode) {
       switch (e.keyCode) {
-        case 37:
+        case constants.KEY_ARROW_LEFT:
           this.onPrevious();
           break;
-        case 39:
+        case constants.KEY_ARROW_RIGHT:
           this.onNext();
           break;
         default:

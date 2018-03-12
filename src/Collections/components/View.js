@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
+import { SIZE_RATIO } from '../../constants';
 
 const Container = glamorous.div(
   {
@@ -12,7 +13,7 @@ const Container = glamorous.div(
   },
   ({ height, width }) => {
     if (height && width) {
-      const size = width * 150 / height;
+      const size = width * SIZE_RATIO / height;
       return {
         flexGrow: `${size}`,
         width: `${size}px`,
