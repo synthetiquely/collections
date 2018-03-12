@@ -31,6 +31,10 @@ class Swipe extends Component {
     this.initListeners();
   }
 
+  componentWillUnmount() {
+    this.destroyListeners();
+  }
+
   onTouchStart(e) {
     e.preventDefault();
     const touchObj = e.changedTouches[0];
@@ -101,6 +105,12 @@ class Swipe extends Component {
     this.surface.addEventListener('touchstart', this.onTouchStart, false);
     this.surface.addEventListener('touchmove', this.onTouchMove, false);
     this.surface.addEventListener('touchend', this.onTouchEnd, false);
+  }
+
+  destroyListeners() {
+    this.surface.removeEventListener('touchstart', this.onTouchStart);
+    this.surface.removeEventListener('touchmove', this.onTouchMove);
+    this.surface.removeEventListener('touchend', this.onTouchEnd);
   }
 
   render() {
