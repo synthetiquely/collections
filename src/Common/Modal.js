@@ -99,30 +99,25 @@ const Prev = glamorous.div({
   },
 });
 
-const Modal = (props) => {
-  if (props.isOpen) {
-    return (
-      <Backdrop onClick={props.onClose}>
-        <Window>
-          <CloseButton onClick={props.onClose}>&times;</CloseButton>
-          <Next
-            onClick={e => props.onChangeSelected(e, constants.DESTINATION_NEXT)}
-          >
-            &#10095;
-          </Next>
-          <Prev
-            onClick={e =>
-              props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)
-            }
-          >
-            &#10094;
-          </Prev>
-          {props.children}
-        </Window>
-      </Backdrop>
-    );
-  }
-  return null;
-};
+const Modal = props => (
+  <Backdrop onClick={props.onClose}>
+    <Window>
+      <CloseButton onClick={props.onClose}>&times;</CloseButton>
+      <Next
+        onClick={e => props.onChangeSelected(e, constants.DESTINATION_NEXT)}
+      >
+          &#10095;
+      </Next>
+      <Prev
+        onClick={e =>
+            props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)
+          }
+      >
+          &#10094;
+      </Prev>
+      {props.children}
+    </Window>
+  </Backdrop>
+);
 
 export default Modal;

@@ -99,7 +99,6 @@ class Collections extends Component {
         {this.renderItems()}
         {selected !== null && (
           <Preview
-            isOpen={selected !== null}
             src={images[selected].src}
             id={images[selected].id}
             title={images[selected].title}

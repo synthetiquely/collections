@@ -10,11 +10,7 @@ const Image = glamorous.img({
 });
 
 export default props => (
-  <Modal
-    isOpen={props.isOpen}
-    onClose={props.onClose}
-    onChangeSelected={props.onChangeSelected}
-  >
+  <Modal onClose={props.onClose} onChangeSelected={props.onChangeSelected}>
     <Image src={props.src} alt={props.title} />
   </Modal>
 );
