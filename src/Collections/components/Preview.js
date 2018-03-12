@@ -9,8 +9,8 @@ const Image = glamorous.img({
   objectFit: 'cover',
 });
 
-export default props => (
-  <Modal onClose={props.onClose} onChangeSelected={props.onChangeSelected}>
-    <Image src={props.src} alt={props.title} />
+export default ({ src, title, ...rest }) => (
+  <Modal {...rest}>
+    <Image src={src} alt={title} />
   </Modal>
 );

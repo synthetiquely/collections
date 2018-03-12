@@ -21,7 +21,6 @@ const Form = glamorous.form({
 const Input = glamorous.input({
   width: '100%',
   padding: '10px',
-  fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
   fontSize: '16px',
   color: '#000',
   border: '1px solid #ccc',
@@ -32,7 +31,6 @@ const Input = glamorous.input({
 });
 
 const Button = glamorous.button({
-  fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
   fontSize: '16px',
   padding: '10px',
   color: '#000',
