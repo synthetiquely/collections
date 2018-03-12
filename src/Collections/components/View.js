@@ -12,7 +12,7 @@ const Container = glamorous.div(
   },
   ({ height, width }) => {
     if (height && width) {
-      const size = width * 200 / height;
+      const size = width * 150 / height;
       return {
         flexGrow: `${size}`,
         width: `${size}px`,
