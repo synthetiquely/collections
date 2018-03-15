@@ -6,6 +6,7 @@ const Container = glamorous.div(
   {
     margin: '2.5px',
     cursor: 'pointer',
+    willChange: 'width, flexGrow',
     ':hover': {
       boxShadow: '1px 1px 1px #ccc',
     },
@@ -28,7 +29,8 @@ const Image = glamorous.img(
     opacity: '0',
     width: '100%',
     verticalAlign: 'bottom',
-    transition: 'opacity 1s',
+    willChange: 'opacity',
+    transition: 'opacity 2s',
   },
   ({ loaded }) => {
     if (loaded) {
@@ -43,6 +45,7 @@ const Image = glamorous.img(
 export default class View extends Component {
   constructor(props) {
     super(props);
+    this.state = { loaded: false };
     this.width = 0;
     this.height = 0;
     this.img = null;
@@ -53,7 +56,9 @@ export default class View extends Component {
   onLoad() {
     this.width = this.img.naturalWidth || this.img.width;
     this.height = this.img.naturalHeight || this.img.height;
-    this.props.onChangeLoading();
+    this.setState({
+      loaded: true,
+    });
   }
 
   setRef(img) {
@@ -61,9 +66,7 @@ export default class View extends Component {
   }
 
   render() {
-    const {
-      src, title, loaded, onClick,
-    } = this.props;
+    const { src, title, onClick } = this.props;
 
     return (
       <Container onClick={onClick} width={this.width} height={this.height}>
@@ -71,7 +74,7 @@ export default class View extends Component {
           src={src}
           alt={title}
           innerRef={this.setRef}
-          loaded={loaded}
+          loaded={this.state.loaded}
           onLoad={this.onLoad}
         />
       </Container>
