@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 const Container = glamorous.div({
   width: '100%',
   height: '100%',
+  touchAction: 'none',
 });
 
 class Swipe extends Component {
@@ -28,6 +29,8 @@ class Swipe extends Component {
   }
 
   onTouchStart(e) {
+    e.preventDefault();
+
     const touchObj = e.changedTouches[0];
     this.setState({
       distX: 0,
@@ -40,6 +43,8 @@ class Swipe extends Component {
   }
 
   onTouchMove(e) {
+    e.preventDefault();
+
     const touchObj = e.changedTouches[0];
     const { startX, startY } = this.state;
     const distX = touchObj.pageX - startX;
