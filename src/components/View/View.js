@@ -12,7 +12,7 @@ const Container = glamorous.div(
   },
   ({ height, width }) => {
     if (height && width) {
-      const size = width * SIZE_RATIO / height;
+      const size = Math.floor(width * SIZE_RATIO / height);
 
       return {
         flexGrow: `${size}`,
@@ -23,28 +23,36 @@ const Container = glamorous.div(
   },
 );
 
-const Image = glamorous.img({
-  width: '100%',
-  verticalAlign: 'bottom',
-});
+const Image = glamorous.img(
+  {
+    opacity: '0',
+    width: '100%',
+    verticalAlign: 'bottom',
+    transition: 'opacity 1s',
+  },
+  ({ loaded }) => {
+    if (loaded) {
+      return {
+        opacity: '1',
+      };
+    }
+    return {};
+  },
+);
 
 export default class View extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      width: 0,
-      height: 0,
-    };
+    this.width = 0;
+    this.height = 0;
     this.img = null;
     this.onLoad = this.onLoad.bind(this);
     this.setRef = this.setRef.bind(this);
   }
 
   onLoad() {
-    this.setState({
-      width: this.img.naturalWidth || this.img.width,
-      height: this.img.naturalHeight || this.img.height,
-    });
+    this.width = this.img.naturalWidth || this.img.width;
+    this.height = this.img.naturalHeight || this.img.height;
     this.props.onChangeLoading();
   }
 
@@ -53,14 +61,17 @@ export default class View extends Component {
   }
 
   render() {
-    const { width, height } = this.state;
-    const { src, title, onClick } = this.props;
+    const {
+      src, title, loaded, onClick,
+    } = this.props;
+
     return (
-      <Container onClick={onClick} width={width} height={height}>
+      <Container onClick={onClick} width={this.width} height={this.height}>
         <Image
           src={src}
           alt={title}
           innerRef={this.setRef}
+          loaded={loaded}
           onLoad={this.onLoad}
         />
       </Container>
