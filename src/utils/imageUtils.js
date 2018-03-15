@@ -36,11 +36,11 @@ export const imagesLoaded = (parentNode) => {
   const imgs = parentNode.querySelectorAll('img');
   let isLoaded = true;
 
-  for (let i = 0; i < imgs.length; i += 1) {
-    if (!imgs[i].complete) {
+  imgs.forEach((img) => {
+    if (!img.complete) {
       isLoaded = false;
     }
-  }
+  });
 
   return isLoaded;
 };
