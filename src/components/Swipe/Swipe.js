@@ -11,20 +11,17 @@ class Swipe extends Component {
   constructor(props) {
     super(props);
     this.surface = null;
-    this.state = {
-      startX: 0,
-      startY: 0,
-      distX: 0,
-      distY: 0,
-      threshold: 150,
-      restraint: 100,
-      allowedTime: 200,
-      startTime: 0,
-      direction: 'none',
-    };
+    this.direction = 'none';
+    this.startX = 0;
+    this.startY = 0;
+    this.distX = 0;
+    this.distY = 0;
+    this.threshold = 150;
+    this.restraint = 100;
+    this.allowedTime = 200;
+    this.startTime = 0;
     this.setRef = this.setRef.bind(this);
     this.onTouchStart = this.onTouchStart.bind(this);
-    this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
   }
 
@@ -32,58 +29,39 @@ class Swipe extends Component {
     e.preventDefault();
 
     const touchObj = e.changedTouches[0];
-    this.setState({
-      distX: 0,
-      distY: 0,
-      direction: 'none',
-      startX: touchObj.pageX,
-      startY: touchObj.pageY,
-      startTime: new Date().getTime(),
-    });
-  }
-
-  onTouchMove(e) {
-    e.preventDefault();
-
-    const touchObj = e.changedTouches[0];
-    const { startX, startY } = this.state;
-    const distX = touchObj.pageX - startX;
-    const distY = touchObj.pageY - startY;
-
-    if (Math.abs(distX) > Math.abs(distY)) {
-      this.setState({
-        distX,
-        distY,
-        direction: distX < 0 ? 'left' : 'right',
-      });
-    } else {
-      this.setState({
-        distX,
-        distY,
-        direction: distY < 0 ? 'up' : 'down',
-      });
-    }
+    this.distX = 0;
+    this.distY = 0;
+    this.startX = touchObj.pageX;
+    this.startY = touchObj.pageY;
+    this.startTime = new Date().getTime();
+    this.direction = 'none';
   }
 
   onTouchEnd(e) {
     e.preventDefault();
 
-    const {
-      startTime,
-      allowedTime,
-      distX,
-      distY,
-      threshold,
-      restraint,
-      direction,
-    } = this.state;
+    const touchObj = e.changedTouches[0];
+    this.distX = touchObj.pageX - this.startX;
+    this.distY = touchObj.pageY - this.startY;
 
-    const elapsedTime = new Date().getTime() - startTime;
-    if (elapsedTime <= allowedTime) {
-      if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
-        this.handleSwipe(direction);
-      } else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint) {
-        this.handleSwipe(direction);
+    if (Math.abs(this.distX) > Math.abs(this.distY)) {
+      this.direction = this.distX < 0 ? 'left' : 'right';
+    } else {
+      this.direction = this.distY < 0 ? 'up' : 'down';
+    }
+
+    const elapsedTime = new Date().getTime() - this.startTime;
+    if (elapsedTime <= this.allowedTime) {
+      if (
+        Math.abs(this.distX) >= this.threshold &&
+        Math.abs(this.distY) <= this.restraint
+      ) {
+        this.handleSwipe(this.direction);
+      } else if (
+        Math.abs(this.distY) >= this.threshold &&
+        Math.abs(this.distX) <= this.restraint
+      ) {
+        this.handleSwipe(this.direction);
       }
     }
   }
@@ -100,7 +78,6 @@ class Swipe extends Component {
     return (
       <Container
         onTouchStart={this.onTouchStart}
-        onTouchMove={this.onTouchMove}
         onTouchEnd={this.onTouchEnd}
         innerRef={this.setRef}
       >
