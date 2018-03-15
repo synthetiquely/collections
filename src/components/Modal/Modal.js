@@ -13,15 +13,13 @@ const Modal = props => (
         direction="right"
         onClick={e => props.onChangeSelected(e, constants.DESTINATION_NEXT)}
       >
-          &#10095;
+        &#10095;
       </ArrowButton>
       <ArrowButton
         direction="left"
-        onClick={e =>
-            props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)
-          }
+        onClick={e => props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)}
       >
-          &#10094;
+        &#10094;
       </ArrowButton>
       {props.children}
     </ModalWindow>

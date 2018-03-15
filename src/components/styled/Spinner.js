@@ -12,7 +12,7 @@ const animationStyles = () => {
     width: '60px',
     height: '60px',
     margin: '5px',
-    border: '10px solid #ffdb4d',
+    border: '5px solid #ffdb4d',
     borderTopColor: 'transparent',
     borderRadius: '50%',
     animation: `${spin} 1s linear infinite`,

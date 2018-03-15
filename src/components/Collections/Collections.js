@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
+import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 import Preview from '../Preview/Preview';
 import View from '../View/View';
 import * as constants from '../../constants';
@@ -117,18 +118,20 @@ class Collections extends Component {
     const { images } = this.props;
 
     return (
-      <Views innerRef={this.setRef} isOpen={selected !== null}>
-        {this.renderItems()}
-        {selected !== null && (
-          <Preview
-            src={images[selected].src}
-            id={images[selected].id}
-            title={images[selected].title}
-            onClose={this.onClose}
-            onChangeSelected={this.onChangeSelected}
-          />
-        )}
-      </Views>
+      <InfiniteScroll>
+        <Views innerRef={this.setRef} isOpen={selected !== null}>
+          {this.renderItems()}
+          {selected !== null && (
+            <Preview
+              src={images[selected].src}
+              id={images[selected].id}
+              title={images[selected].title}
+              onClose={this.onClose}
+              onChangeSelected={this.onChangeSelected}
+            />
+          )}
+        </Views>
+      </InfiniteScroll>
     );
   }
 }
