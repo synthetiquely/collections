@@ -5,26 +5,25 @@ import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 import Preview from '../Preview/Preview';
 import View from '../View/View';
 import * as constants from '../../constants';
-import { imagesLoaded } from '../../utils/imageUtils';
+// import { imagesLoaded } from '../../utils/imageUtils';
 
 class Collections extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: null,
-      loading: true,
     };
     this.galleryElement = null;
     this.onClose = this.onClose.bind(this);
-    this.onChangeLoading = this.onChangeLoading.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.setRef = this.setRef.bind(this);
   }
 
   onClick(index) {
-    this.setState({
-      selected: index,
-    });
+    return () =>
+      this.setState({
+        selected: index,
+      });
   }
 
   onChangeSelected(e, destination) {
@@ -57,14 +56,6 @@ class Collections extends Component {
     }
   }
 
-  onChangeLoading() {
-    const isLoaded = !imagesLoaded(this.galleryElement);
-
-    this.setState({
-      loading: isLoaded,
-    });
-  }
-
   onClose() {
     this.setState({
       selected: null,
@@ -79,14 +70,13 @@ class Collections extends Component {
     if (!this.props.images) {
       return null;
     }
+
     return this.props.images.map((item, index) => (
       <View
         src={item.src}
         title={item.title}
         key={item.id}
-        loaded={!this.state.loading}
-        onClick={() => this.onClick(index)}
-        onChangeLoading={this.onChangeLoading}
+        onClick={this.onClick(index)}
       />
     ));
   }
