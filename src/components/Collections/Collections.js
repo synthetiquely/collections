@@ -18,35 +18,13 @@ class Collections extends Component {
     this.onClose = this.onClose.bind(this);
     this.onChangeLoading = this.onChangeLoading.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
     this.setRef = this.setRef.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.onKeyDown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onClick(index) {
     this.setState({
       selected: index,
     });
-  }
-
-  onKeyDown(e) {
-    if (this.state.selected !== null && e.keyCode) {
-      switch (e.keyCode) {
-        case constants.KEY_ARROW_LEFT:
-          this.onChangeSelected(null, constants.DESTINATION_PREVIOUS);
-          break;
-        case constants.KEY_ARROW_RIGHT:
-          this.onChangeSelected(null, constants.DESTINATION_NEXT);
-          break;
-      }
-    }
   }
 
   onChangeSelected(e, destination) {
