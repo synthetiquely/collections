@@ -5,7 +5,6 @@ import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 import Preview from '../Preview/Preview';
 import View from '../View/View';
 import * as constants from '../../constants';
-// import { imagesLoaded } from '../../utils/imageUtils';
 
 class Collections extends Component {
   constructor(props) {

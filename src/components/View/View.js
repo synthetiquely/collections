@@ -50,16 +50,25 @@ export default class View extends Component {
     this.height = 0;
     this.img = null;
     this.onLoad = this.onLoad.bind(this);
+    this.onError = this.onError.bind(this);
     this.setRef = this.setRef.bind(this);
   }
 
   onLoad() {
+    /**
+     * Due to the fact that img width and height will be known in advance
+     * as soon as we bring API to our app,
+     * we could remove this lines of code.
+     */
     this.width = this.img.naturalWidth || this.img.width;
     this.height = this.img.naturalHeight || this.img.height;
     this.setState({
       loaded: true,
     });
   }
+
+  // @TODO: handle error case
+  onError() {}
 
   setRef(img) {
     this.img = img;
@@ -76,6 +85,7 @@ export default class View extends Component {
           innerRef={this.setRef}
           loaded={this.state.loaded}
           onLoad={this.onLoad}
+          onError={this.onError}
         />
       </Container>
     );
