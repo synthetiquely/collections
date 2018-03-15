@@ -3,7 +3,6 @@ import glamorous from 'glamorous';
 
 import Preview from '../Preview/Preview';
 import View from '../View/View';
-import Spinner from '../styled/Spinner';
 import * as constants from '../../constants';
 import { imagesLoaded } from '../../utils/imageUtils';
 
@@ -97,19 +96,16 @@ class Collections extends Component {
     this.galleryElement = element;
   }
 
-  renderSpinner() {
-    if (!this.state.loading) {
+  renderItems() {
+    if (!this.props.images) {
       return null;
     }
-    return <Spinner />;
-  }
-
-  renderItems() {
     return this.props.images.map((item, index) => (
       <View
         src={item.src}
         title={item.title}
         key={item.id}
+        loaded={!this.state.loading}
         onClick={() => this.onClick(index)}
         onChangeLoading={this.onChangeLoading}
       />
@@ -122,7 +118,6 @@ class Collections extends Component {
 
     return (
       <Views innerRef={this.setRef} isOpen={selected !== null}>
-        {this.renderSpinner()}
         {this.renderItems()}
         {selected !== null && (
           <Preview
