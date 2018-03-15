@@ -27,16 +27,7 @@ class Swipe extends Component {
     this.onTouchEnd = this.onTouchEnd.bind(this);
   }
 
-  componentDidMount() {
-    this.initListeners();
-  }
-
-  componentWillUnmount() {
-    this.destroyListeners();
-  }
-
   onTouchStart(e) {
-    e.preventDefault();
     const touchObj = e.changedTouches[0];
     this.setState({
       distX: 0,
@@ -49,7 +40,6 @@ class Swipe extends Component {
   }
 
   onTouchMove(e) {
-    e.preventDefault();
     const touchObj = e.changedTouches[0];
     const { startX, startY } = this.state;
     const distX = touchObj.pageX - startX;
@@ -101,20 +91,17 @@ class Swipe extends Component {
     this.props.onSwipe(direction);
   }
 
-  initListeners() {
-    this.surface.addEventListener('touchstart', this.onTouchStart, false);
-    this.surface.addEventListener('touchmove', this.onTouchMove, false);
-    this.surface.addEventListener('touchend', this.onTouchEnd, false);
-  }
-
-  destroyListeners() {
-    this.surface.removeEventListener('touchstart', this.onTouchStart);
-    this.surface.removeEventListener('touchmove', this.onTouchMove);
-    this.surface.removeEventListener('touchend', this.onTouchEnd);
-  }
-
   render() {
-    return <Container innerRef={this.setRef}>{this.props.children}</Container>;
+    return (
+      <Container
+        onTouchStart={this.onTouchStart}
+        onTouchMove={this.onTouchMove}
+        onTouchEnd={this.onTouchEnd}
+        innerRef={this.setRef}
+      >
+        {this.props.children}
+      </Container>
+    );
   }
 }
 
