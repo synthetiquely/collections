@@ -7,7 +7,7 @@ import * as constants from '../../constants';
 const Image = glamorous.img({
   width: '100%',
   height: '100%',
-  objectFit: 'cover',
+  objectFit: 'contain',
 });
 
 class Preview extends Component {
