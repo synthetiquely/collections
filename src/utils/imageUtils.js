@@ -1,25 +1,26 @@
 /**
- * Find out orientation of a given image
+ * Find out orientation, width and height of a given image
  * @param {string} src - souce of an image
- * @returns {Promise<string>} - orientation could be: 'landscape' | 'portrait' | 'even';
+ * @returns {Promise<{ orientation: string, width: number, height: number }>}
+ * - orientation could be: 'landscape' | 'portrait' | 'even';
  */
-export const calculateImageOrientation = (src) => {
+export const calculateImageSizes = (src) => {
   let orientation;
   let img = new Image();
 
   return new Promise((resolve) => {
     img.onload = () => {
-      const w = img.naturalWidth || img.width;
-      const h = img.naturalHeight || img.height;
-      if (w > h) {
+      const width = img.naturalWidth || img.width;
+      const height = img.naturalHeight || img.height;
+      if (width > height) {
         orientation = 'landscape';
-      } else if (w < h) {
+      } else if (width < height) {
         orientation = 'portrait';
       } else {
         orientation = 'even';
       }
       img = null;
-      resolve(orientation);
+      resolve({ orientation, width, height });
     };
     img.src = src;
   });
