@@ -33,8 +33,13 @@ const Overlay = glamorous.div({
 
 const Spinner = glamorous.span(animationStyles);
 
-export default () => (
-  <Overlay>
-    <Spinner />
-  </Overlay>
-);
+export default ({ overlayed, ...rest }) => {
+  if (overlayed) {
+    return (
+      <Overlay>
+        <Spinner {...rest} />
+      </Overlay>
+    );
+  }
+  return <Spinner {...rest} />;
+};
