@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import glamorous from 'glamorous';
 
-import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
+import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
-import View from '../View/View';
+import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
+
 import * as constants from '../../constants';
 
 class Collections extends Component {
@@ -12,10 +12,9 @@ class Collections extends Component {
     this.state = {
       selected: null,
     };
-    this.galleryElement = null;
-    this.onClose = this.onClose.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
-    this.setRef = this.setRef.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   onClick(index) {
@@ -61,62 +60,29 @@ class Collections extends Component {
     });
   }
 
-  setRef(element) {
-    this.galleryElement = element;
-  }
-
-  renderItems() {
-    if (!this.props.images) {
-      return null;
-    }
-
-    return this.props.images.map((item, index) => (
-      <View
-        src={item.src}
-        title={item.title}
-        key={item.id}
-        onClick={this.onClick(index)}
-      />
-    ));
-  }
-
   render() {
     const { selected } = this.state;
     const { images } = this.props;
 
     return (
       <InfiniteScroll>
-        <Views innerRef={this.setRef} isOpen={selected !== null}>
-          {this.renderItems()}
-          {selected !== null && (
-            <Preview
-              src={images[selected].src}
-              id={images[selected].id}
-              title={images[selected].title}
-              onClose={this.onClose}
-              onChangeSelected={this.onChangeSelected}
-            />
-          )}
-        </Views>
+        <Views
+          images={images}
+          isOpen={selected !== null}
+          onClick={this.onClick}
+        />
+        {selected !== null && (
+          <Preview
+            src={images[selected].src}
+            id={images[selected].id}
+            title={images[selected].title}
+            onClose={this.onClose}
+            onChangeSelected={this.onChangeSelected}
+          />
+        )}
       </InfiniteScroll>
     );
   }
 }
-
-const Views = glamorous.section(
-  {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '@media only screen and (min-width: 768px)': {
-      '&::after': {
-        content: "''",
-        flexGrow: '999999999',
-      },
-    },
-  },
-  ({ isOpen }) => ({
-    overflowY: isOpen ? 'hidden' : 'auto',
-  }),
-);
 
 export default Collections;
