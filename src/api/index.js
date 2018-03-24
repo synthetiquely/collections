@@ -19,7 +19,7 @@ export default [
   {
     id: '4',
     src:
-      'http://scontent-arn2-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22430171_134521763938677_674873313641627648_n.jpg',
+      'https://fthmb.tqn.com/ePNoxHqRnX61tgCREk6bd5sUZfg=/960x0/filters:no_upscale()/young-kitten-eating-from-blue-bowl-145561913-588754cf5f9b58bdb3f70aa6.jpg',
     title: 'A kitty with a cup of coffee',
   },
   {
@@ -107,7 +107,7 @@ export default [
   {
     id: '19',
     src:
-      'http://scontent-arn2-1.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22430171_134521763938677_674873313641627648_n.jpg',
+      'https://fthmb.tqn.com/ePNoxHqRnX61tgCREk6bd5sUZfg=/960x0/filters:no_upscale()/young-kitten-eating-from-blue-bowl-145561913-588754cf5f9b58bdb3f70aa6.jpg',
     title: 'A kitty with a cup of coffee',
   },
   {

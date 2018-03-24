@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import glamorous from 'glamorous';
 
-const Container = glamorous.div({
+const SwipeContainer = glamorous.div({
   width: '100%',
   height: '100%',
   touchAction: 'none',
@@ -76,13 +76,13 @@ class Swipe extends Component {
 
   render() {
     return (
-      <Container
+      <SwipeContainer
         onTouchStart={this.onTouchStart}
         onTouchEnd={this.onTouchEnd}
         innerRef={this.setRef}
       >
         {this.props.children}
-      </Container>
+      </SwipeContainer>
     );
   }
 }

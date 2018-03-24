@@ -1,6 +1,7 @@
 import React from 'react';
 import glamorous from 'glamorous';
 import Link from '../styled/Link';
+import Paragraph from '../styled/Paragraph';
 
 const Footer = glamorous.footer({
   gridArea: 'footer',
@@ -10,10 +11,6 @@ const Footer = glamorous.footer({
   alignItems: 'center',
   backgroundColor: '#fff',
   borderTop: '1px solid rgba(0,0,0,.1)',
-});
-
-const Paragraph = glamorous.p({
-  textAlign: 'center',
 });
 
 export default () => (

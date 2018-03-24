@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from '../styled/Spinner';
-import Centered from '../styled/Centered';
+import CenteredContainer from '../styled/CenteredContainer';
 import { SCROLL_THESHOLD } from '../../constants';
 
 class InfiniteScoll extends Component {
@@ -56,9 +56,9 @@ class InfiniteScoll extends Component {
       <div style={{ overflow: 'auto' }} ref={this.setRef}>
         {this.props.children}
         {this.state.loading && (
-          <Centered>
+          <CenteredContainer>
             <Spinner />
-          </Centered>
+          </CenteredContainer>
         )}
       </div>
     );

@@ -1,9 +1,9 @@
 import glamorous from 'glamorous';
 
-const Centered = glamorous.div({
+const CenteredContainer = glamorous.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 });
 
-export default Centered;
+export default CenteredContainer;

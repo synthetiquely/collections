@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import { SIZE_RATIO } from '../../constants';
 
-const Container = glamorous.div(
+const ImageContainer = glamorous.div(
   {
     margin: '2.5px',
     cursor: 'pointer',
@@ -78,7 +78,7 @@ export default class View extends Component {
     const { src, title, onClick } = this.props;
 
     return (
-      <Container onClick={onClick} width={this.width} height={this.height}>
+      <ImageContainer onClick={onClick} width={this.width} height={this.height}>
         <Image
           src={src}
           alt={title}
@@ -87,7 +87,7 @@ export default class View extends Component {
           onLoad={this.onLoad}
           onError={this.onError}
         />
-      </Container>
+      </ImageContainer>
     );
   }
 }
