@@ -10,10 +10,10 @@ install:
 - yarn
 script:
 - yarn lint
-after_sucess:
-- yarn build
 before_deploy:
+- yarn build
 - echo "Initializing deployment..."
+- cd build
 deploy:
   provider: pages
   skip-cleanup: true

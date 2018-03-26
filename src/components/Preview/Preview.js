@@ -33,6 +33,7 @@ class Preview extends Component {
 
   onKeyDown(e) {
     if (e.keyCode) {
+      // eslint-disable-next-line
       switch (e.keyCode) {
         case KEY_ARROW_LEFT:
           this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
