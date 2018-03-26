@@ -23,7 +23,7 @@ Collections is an web application, which displays images of various topics in a 
 * Glamorous
 
 ## Demo
-No demo available yet.
+Demo is available [here](https://synthetiquely.github.io/collections/)
 
 ## Author
 [Anatoly Belobrovik](https://github.com/synthetiquely/)
