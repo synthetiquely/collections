@@ -1,4 +1,4 @@
-sudo enabled
+sudo: false
 language: node_js
 node_js:
 - '9'
