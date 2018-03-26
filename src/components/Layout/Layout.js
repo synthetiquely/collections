@@ -1,4 +1,3 @@
-import React from 'react';
 import glamorous from 'glamorous';
 
 const Layout = glamorous.div({
@@ -13,4 +12,4 @@ const Layout = glamorous.div({
     `,
 });
 
-export default props => <Layout>{props.children}</Layout>;
+export default Layout;

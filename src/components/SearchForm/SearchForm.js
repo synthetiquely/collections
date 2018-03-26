@@ -1,5 +1,5 @@
 import React from 'react';
-import glamorous from 'glamorous';
+import Form from '../styled/Form';
 import TextInput from '../styled/TextInput';
 import Button from '../styled/Button';
 
@@ -14,10 +14,5 @@ const SearchForm = () => (
     <Button type="submit">Найти</Button>
   </Form>
 );
-
-const Form = glamorous.form({
-  display: 'flex',
-  flexDirection: 'row',
-});
 
 export default SearchForm;

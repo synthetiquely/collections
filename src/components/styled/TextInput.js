@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-const Input = glamorous.input({
+const TextInput = glamorous.input({
   width: '100%',
   padding: '10px',
   fontSize: '16px',
@@ -12,4 +12,4 @@ const Input = glamorous.input({
   outlineColor: '#ffdb4d',
 });
 
-export default Input;
+export default TextInput;

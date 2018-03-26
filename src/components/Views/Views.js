@@ -1,6 +1,6 @@
 import React from 'react';
-import glamorous from 'glamorous';
 import View from '../View/View';
+import Gallery from './Gallery';
 
 const Views = ({ images, isOpen, onClick }) => {
   if (!images) {
@@ -19,21 +19,5 @@ const Views = ({ images, isOpen, onClick }) => {
 
   return <Gallery isOpen={isOpen}>{renderItems()}</Gallery>;
 };
-
-const Gallery = glamorous.section(
-  {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '@media only screen and (min-width: 768px)': {
-      '&::after': {
-        content: "''",
-        flexGrow: '999999999',
-      },
-    },
-  },
-  ({ isOpen }) => ({
-    overflowY: isOpen ? 'hidden' : 'auto',
-  }),
-);
 
 export default Views;
