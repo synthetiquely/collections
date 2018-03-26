@@ -1,5 +1,5 @@
 import React from 'react';
-import * as constants from '../../constants';
+import { DESTINATION_NEXT, DESTINATION_PREVIOUS } from '../../constants';
 import Backdrop from '../styled/Backdrop';
 import ModalWindow from '../styled/ModalWindow';
 import ArrowButton from '../styled/ArrowButton';
@@ -11,13 +11,13 @@ const Modal = props => (
       <CloseButton onClick={props.onClose}>&times;</CloseButton>
       <ArrowButton
         direction="right"
-        onClick={e => props.onChangeSelected(e, constants.DESTINATION_NEXT)}
+        onClick={e => props.onChangeSelected(e, DESTINATION_NEXT)}
       >
         &#10095;
       </ArrowButton>
       <ArrowButton
         direction="left"
-        onClick={e => props.onChangeSelected(e, constants.DESTINATION_PREVIOUS)}
+        onClick={e => props.onChangeSelected(e, DESTINATION_PREVIOUS)}
       >
         &#10094;
       </ArrowButton>

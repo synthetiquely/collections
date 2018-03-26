@@ -8,7 +8,7 @@ export const calculateImageSizes = (src) => {
   let orientation;
   let img = new Image();
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     img.onload = () => {
       const width = img.naturalWidth || img.width;
       const height = img.naturalHeight || img.height;
@@ -21,6 +21,9 @@ export const calculateImageSizes = (src) => {
       }
       img = null;
       resolve({ orientation, width, height });
+    };
+    img.onerror = () => {
+      reject(new Error('Failed to load image'));
     };
     img.src = src;
   });

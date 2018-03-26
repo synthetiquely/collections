@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import Modal from '../Modal/Modal';
 import Swipe from '../Swipe/Swipe';
-import * as constants from '../../constants';
+import {
+  DESTINATION_PREVIOUS,
+  DESTINATION_NEXT,
+  KEY_ARROW_LEFT,
+  KEY_ARROW_RIGHT,
+  KEY_ESC,
+} from '../../constants';
 
 const Image = glamorous.img({
   width: '100%',
@@ -28,21 +34,23 @@ class Preview extends Component {
   onKeyDown(e) {
     if (e.keyCode) {
       switch (e.keyCode) {
-        case constants.KEY_ARROW_LEFT:
-          this.props.onChangeSelected(null, constants.DESTINATION_PREVIOUS);
+        case KEY_ARROW_LEFT:
+          this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
           break;
-        case constants.KEY_ARROW_RIGHT:
-          this.props.onChangeSelected(null, constants.DESTINATION_NEXT);
+        case KEY_ARROW_RIGHT:
+          this.props.onChangeSelected(null, DESTINATION_NEXT);
           break;
+        case KEY_ESC:
+          this.props.onClose();
       }
     }
   }
 
   onSwipe(direction) {
     if (direction === 'left' || direction === 'down') {
-      this.props.onChangeSelected(null, constants.DESTINATION_PREVIOUS);
+      this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
     } else if (direction === 'right' || direction === 'up') {
-      this.props.onChangeSelected(null, constants.DESTINATION_NEXT);
+      this.props.onChangeSelected(null, DESTINATION_NEXT);
     }
   }
 
