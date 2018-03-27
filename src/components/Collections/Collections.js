@@ -66,7 +66,10 @@ class Collections extends Component {
     const { selected } = this.state;
 
     return (
-      <InfiniteScroll>
+      <InfiniteScroll
+        isLoading={this.props.collections.isLoading}
+        loadMore={this.props.collections.loadItems}
+      >
         <Views
           images={this.props.collections.photos}
           isOpen={selected !== null}

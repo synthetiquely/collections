@@ -1,16 +1,16 @@
 import { observable, action, runInAction } from 'mobx';
-// import { RESULTS_LIMIT } from '../constants';
+import { RESULTS_LIMIT } from '../constants';
 
 class CollectionsStore {
   @observable photos;
   @observable isLoading;
-  @observable skip;
+  @observable nextPage;
 
   constructor(api) {
     this.api = api;
     this.photos = [];
     this.isLoading = false;
-    this.skip = 0;
+    this.nextPage = 1;
     this.loadItems();
   }
 
@@ -18,14 +18,21 @@ class CollectionsStore {
   async loadItems() {
     this.isLoading = true;
     try {
-      const photos = await this.api.getPhotos();
+      const photos = await this.api.getPhotos(
+        this.nextPage,
+        RESULTS_LIMIT,
+        'oldest',
+      );
       runInAction(() => {
-        this.photos = photos;
+        this.photos = [...this.photos, ...photos];
+        this.nextPage += 1;
       });
     } catch (error) {
       window.console.log('Error occured while trying to getPhotos', error);
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 }

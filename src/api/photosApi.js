@@ -19,11 +19,10 @@ class PhotosAPI {
    * @param {{ page?: number, per_page?: number, orderBy?: string }} options
    * @returns {Promise<Photo[]>}
    */
-  getPhotos = (...options) =>
-    this.api.photos
-      .listPhotos(...options)
-      .then(toJson)
-      .then(json => json.map(data => new Photo(data)));
+  getPhotos = (...options) => this.api.photos
+    .listPhotos(...options)
+    .then(toJson)
+    .then(json => json.map(data => new Photo(data)));
 }
 
 export default PhotosAPI;
