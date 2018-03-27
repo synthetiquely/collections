@@ -1,4 +1,5 @@
 import { toJson } from 'unsplash-js';
+import Photo from './Photo';
 
 /**
  * SearchAPI defines methods which allows you to communicate with a provider
@@ -17,10 +18,13 @@ class SearchAPI {
    * Get a list of photos matching the keyword
    * @param {string} keyword
    * @param {{ page?: number, per_page?: number }} options
-   * @returns {Promise<any>}
+   * @returns {Promise<Photo[]>}
    */
   searchPhotos = (keyword, ...options) =>
-    this.api.search.photos(keyword, ...options).then(toJson);
+    this.api.search
+      .photos(keyword, ...options)
+      .then(toJson)
+      .then(json => json.results.map(data => new Photo(data)));
 }
 
 export default SearchAPI;

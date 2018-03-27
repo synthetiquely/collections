@@ -14,6 +14,9 @@ class CollectionsStore {
     this.loadItems();
   }
 
+  /**
+   * TODO: Implement loadItems for a search term, if it is specified by user
+   */
   @action.bound
   async loadItems() {
     this.isLoading = true;

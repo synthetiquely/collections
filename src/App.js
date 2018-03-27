@@ -1,7 +1,5 @@
 import React from 'react';
 
-import api from './api/mock';
-
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
@@ -17,7 +15,7 @@ const App = () => (
       <SearchForm />
     </Header>
     <Content>
-      <Collections images={api} />
+      <Collections />
     </Content>
     <Footer>
       <Paragraph>

@@ -57,7 +57,7 @@ class InfiniteScoll extends Component {
         {this.props.children}
         {this.props.isLoading && (
           <CenteredContainer>
-            <Spinner />
+            <Spinner size="lg" />
           </CenteredContainer>
         )}
       </div>

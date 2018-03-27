@@ -1,6 +1,11 @@
+import React from 'react';
 import glamorous from 'glamorous';
+import Spinner from './Spinner';
 
 const Button = glamorous.button({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   fontSize: '16px',
   padding: '10px',
   color: '#000',
@@ -14,4 +19,9 @@ const Button = glamorous.button({
   cursor: 'pointer',
 });
 
-export default Button;
+export default ({ loading, ...rest }) => (
+  <Button {...rest}>
+    {loading && <Spinner size="sm" />}{' '}
+    <span style={{ padding: '0 15px' }}>{rest.children}</span>
+  </Button>
+);
