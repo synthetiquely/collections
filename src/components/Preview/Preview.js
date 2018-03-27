@@ -16,6 +16,8 @@ const Image = glamorous.img({
   objectFit: 'contain',
 });
 
+const body = document.getElementsByTagName('body')[0];
+
 class Preview extends Component {
   constructor(props) {
     super(props);
@@ -24,10 +26,12 @@ class Preview extends Component {
   }
 
   componentDidMount() {
+    body.classList.add('overlayed');
     document.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
+    body.classList.remove('overlayed');
     document.removeEventListener('keydown', this.onKeyDown);
   }
 

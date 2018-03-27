@@ -8,6 +8,7 @@ const Backdrop = glamorous.div({
   top: '0px',
   left: '0px',
   zIndex: '1',
+  overflow: 'hidden',
   backgroundColor: 'rgba(0,0,0,0.6)',
 });
 
