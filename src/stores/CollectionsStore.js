@@ -1,24 +1,30 @@
 import { observable, action } from 'mobx';
-import { RESULTS_LIMIT } from '../constants';
+// import { RESULTS_LIMIT } from '../constants';
 
 class CollectionsStore {
-  @observable images;
+  @observable photos;
   @observable isLoading;
   @observable skip;
 
   constructor(api) {
     this.api = api;
-    this.images = [];
+    this.photos = [];
     this.isLoading = false;
     this.skip = 0;
+    this.loadItems();
   }
 
   @action
   async loadItems() {
     this.isLoading = true;
-    const images = await this.api.fetchImages(this.skip, RESULTS_LIMIT);
-    this.isLoading = false;
-    this.images = images;
+    try {
+      const photos = await this.api.getPhotos();
+      this.photos = photos;
+    } catch (error) {
+      window.console.log('Error occured while trying to getPhotos', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
 

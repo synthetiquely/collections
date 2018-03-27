@@ -20,12 +20,7 @@ class SearchAPI {
    * @returns {Promise<any>}
    */
   searchPhotos = (keyword, ...options) =>
-    this.api.search
-      .photos(keyword, ...options)
-      .then(toJson)
-      .then((json) => {
-        window.console.log(json);
-      });
+    this.api.search.photos(keyword, ...options).then(toJson);
 }
 
 export default SearchAPI;

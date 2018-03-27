@@ -1,6 +1,6 @@
 import React from 'react';
 
-import api from './api';
+import api from './api/mock';
 
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
@@ -26,6 +26,9 @@ const App = () => (
           public repository
         </Link>{' '}
         for more details.
+        <br />
+        Please note, that images, that are listed above may be subject to
+        copyright.
       </Paragraph>
     </Footer>
   </Layout>

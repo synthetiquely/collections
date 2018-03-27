@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 
 import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
@@ -6,6 +7,8 @@ import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 
 import * as constants from '../../constants';
 
+@inject('collections')
+@observer
 class Collections extends Component {
   constructor(props) {
     super(props);
