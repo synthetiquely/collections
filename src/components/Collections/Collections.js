@@ -33,9 +33,8 @@ class Collections extends Component {
       e.nativeEvent.stopImmediatePropagation();
     }
 
-    const { images } = this.props;
     if (destination === constants.DESTINATION_NEXT) {
-      if (images[this.state.selected + 1]) {
+      if (this.props.collections.photos[this.state.selected + 1]) {
         this.setState(prevState => ({
           selected: prevState.selected + 1,
         }));
@@ -45,13 +44,13 @@ class Collections extends Component {
         });
       }
     } else if (destination === constants.DESTINATION_PREVIOUS) {
-      if (images[this.state.selected - 1]) {
+      if (this.props.collections.photos[this.state.selected - 1]) {
         this.setState(prevState => ({
           selected: prevState.selected - 1,
         }));
       } else {
         this.setState({
-          selected: images.length - 1,
+          selected: this.props.collections.photos.length - 1,
         });
       }
     }
@@ -65,20 +64,18 @@ class Collections extends Component {
 
   render() {
     const { selected } = this.state;
-    const { images } = this.props;
 
     return (
       <InfiniteScroll>
         <Views
-          images={images}
+          images={this.props.collections.photos}
           isOpen={selected !== null}
           onClick={this.onClick}
         />
         {selected !== null && (
           <Preview
-            src={images[selected].src}
-            id={images[selected].id}
-            title={images[selected].title}
+            image={this.props.collections.photos[selected]}
+            description={this.props.collections.photos[selected].description}
             onClose={this.onClose}
             onChangeSelected={this.onChangeSelected}
           />

@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, runInAction } from 'mobx';
 // import { RESULTS_LIMIT } from '../constants';
 
 class CollectionsStore {
@@ -14,12 +14,14 @@ class CollectionsStore {
     this.loadItems();
   }
 
-  @action
+  @action.bound
   async loadItems() {
     this.isLoading = true;
     try {
       const photos = await this.api.getPhotos();
-      this.photos = photos;
+      runInAction(() => {
+        this.photos = photos;
+      });
     } catch (error) {
       window.console.log('Error occured while trying to getPhotos', error);
     } finally {

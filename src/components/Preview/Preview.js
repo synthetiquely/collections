@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import glamorous from 'glamorous';
 import Modal from '../Modal/Modal';
 import Swipe from '../Swipe/Swipe';
@@ -11,13 +12,14 @@ import {
 } from '../../constants';
 
 const Image = glamorous.img({
-  width: '100%',
-  height: '100%',
+  maxWidth: '75vw',
+  maxHeight: '75vh',
   objectFit: 'contain',
 });
 
 const body = document.getElementsByTagName('body')[0];
 
+@observer
 class Preview extends Component {
   constructor(props) {
     super(props);
@@ -60,11 +62,11 @@ class Preview extends Component {
   }
 
   render() {
-    const { src, title, ...rest } = this.props;
+    const { image, ...rest } = this.props;
     return (
       <Modal {...rest}>
         <Swipe onSwipe={this.onSwipe}>
-          <Image src={src} alt={title} />
+          <Image src={image.src} alt={image.description} />
         </Swipe>
       </Modal>
     );

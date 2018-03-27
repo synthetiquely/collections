@@ -10,16 +10,19 @@ const ImageContainer = glamorous.div(
       boxShadow: '1px 1px 1px #ccc',
     },
   },
-  ({ height, width }) => {
+  ({ height, width, color }) => {
+    const styles = {};
     if (height && width) {
       const size = Math.floor(width * SIZE_RATIO / height);
 
-      return {
-        flexGrow: `${size}`,
-        width: `${size}px`,
-      };
+      styles.flexGrow = size;
+      styles.width = `${size}px`;
     }
-    return {};
+
+    if (color) {
+      styles.backgroundColor = color;
+    }
+    return styles;
   },
 );
 
