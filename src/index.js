@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.css';
+import { configure } from 'mobx';
+import { Provider } from 'mobx-react';
 
 import App from './App';
+import CollectionsStore from './stores/CollectionsStore';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './index.css';
+
+configure({
+  enforceActions: true,
+});
+
+const collectionsStore = new CollectionsStore();
+
+ReactDOM.render(
+  <Provider collections={collectionsStore}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
