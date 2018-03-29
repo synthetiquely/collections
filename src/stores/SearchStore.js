@@ -19,7 +19,7 @@ class SearchStore {
     try {
       const photos = await this.api.searchPhotos(this.term, 1, RESULTS_LIMIT);
       runInAction(() => {
-        this.collectionsStore.photos = photos;
+        this.collectionsStore.setItems(photos);
       });
     } catch (error) {
       window.console.log(

@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react';
 
 import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
-import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
 
 import * as constants from '../../constants';
 
@@ -66,13 +65,12 @@ class Collections extends Component {
     const { selected } = this.state;
 
     return (
-      <InfiniteScroll
-        isLoading={this.props.collections.isLoading}
-        loadMore={this.props.collections.loadItems}
-      >
+      <React.Fragment>
         <Views
           images={this.props.collections.photos}
           isOpen={selected !== null}
+          isLoading={this.props.collections.isLoading}
+          loadItems={this.props.collections.loadItems}
           onClick={this.onClick}
         />
         {selected !== null && (
@@ -83,7 +81,7 @@ class Collections extends Component {
             onChangeSelected={this.onChangeSelected}
           />
         )}
-      </InfiniteScroll>
+      </React.Fragment>
     );
   }
 }

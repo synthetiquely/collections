@@ -24,7 +24,7 @@ class CollectionsStore {
       const photos = await this.api.getPhotos(
         this.nextPage,
         RESULTS_LIMIT,
-        'oldest',
+        'latest',
       );
       runInAction(() => {
         this.photos = [...this.photos, ...photos];
@@ -37,6 +37,18 @@ class CollectionsStore {
         this.isLoading = false;
       });
     }
+  }
+
+  @action.bound
+  setItems(items) {
+    this.photos = items;
+    this.nextPage = 1;
+  }
+
+  @action.bound
+  clearItems() {
+    this.photos = [];
+    this.nextPage = 1;
   }
 }
 
