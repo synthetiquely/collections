@@ -48,28 +48,23 @@ class SearchStore {
 
   @action.bound
   async searchPhotos(term) {
-    if (!term) {
-      const photos = await this.api.searchPhotos(
-        this.searchTerm,
-        this.nextPage,
-        RESULTS_LIMIT,
-      );
-      runInAction(() => {
-        this.collections.appendItems(photos);
-        this.setLoading(false);
-      });
-    } else {
+    if (term) {
       this.setPage(1);
-      const photos = await this.api.searchPhotos(
-        term,
-        this.nextPage,
-        RESULTS_LIMIT,
-      );
-      runInAction(() => {
-        this.collections.setItems(photos);
-        this.setLoading(false);
-      });
     }
+
+    const photos = await this.api.searchPhotos(
+      term || this.searchTerm,
+      this.nextPage,
+      RESULTS_LIMIT,
+    );
+    runInAction(() => {
+      if (term) {
+        this.collections.setItems(photos);
+      } else {
+        this.collections.appendItems(photos);
+      }
+      this.setLoading(false);
+    });
   }
 
   @action.bound
