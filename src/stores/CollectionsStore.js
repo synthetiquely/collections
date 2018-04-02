@@ -22,7 +22,7 @@ class CollectionsStore {
 
   @action.bound
   selectPhoto(index) {
-    this.selectedPhoto = index || null;
+    this.selectedPhoto = index;
   }
 
   @action.bound
