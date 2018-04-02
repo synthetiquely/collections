@@ -15,7 +15,6 @@ class SearchStore {
     this.nextPage = 1;
     this.isLoading = false;
     this.error = null;
-    this.recalculateLimit();
     this.loadItems();
   }
 
