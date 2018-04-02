@@ -2,35 +2,95 @@ import { observable, action, runInAction } from 'mobx';
 import { RESULTS_LIMIT } from '../constants';
 
 class SearchStore {
-  @observable term;
+  @observable searchTerm;
+  @observable nextPage;
   @observable isLoading;
+  @observable error;
 
-  constructor(api, collectionsStore) {
+  constructor(api, collections) {
     this.api = api;
-    this.collectionsStore = collectionsStore;
-    this.term = '';
+    this.collections = collections;
+    this.searchTerm = '';
+    this.nextPage = 1;
     this.isLoading = false;
+    this.error = null;
+    this.loadItems();
   }
 
   @action.bound
-  async search(term) {
-    this.isLoading = true;
-    this.term = term;
+  loadItems(term) {
     try {
-      const photos = await this.api.searchPhotos(this.term, 1, RESULTS_LIMIT);
-      runInAction(() => {
-        this.collectionsStore.setItems(photos);
-      });
+      this.setLoading(true);
+      this.setError(null);
+      if (!this.searchTerm && !term) {
+        this.fetchPhotos();
+      } else {
+        this.searchPhotos(term);
+      }
+      this.setPage(this.nextPage + 1);
     } catch (error) {
-      window.console.log(
-        'Error occured while trying to search for photos',
-        error,
-      );
-    } finally {
       runInAction(() => {
-        this.isLoading = false;
+        this.setError(error);
+        this.setLoading(false);
       });
     }
+  }
+
+  @action.bound
+  async fetchPhotos() {
+    const photos = await this.api.getPhotos(this.nextPage, RESULTS_LIMIT);
+    runInAction(() => {
+      this.collections.appendItems(photos);
+
+      this.setLoading(false);
+    });
+  }
+
+  @action.bound
+  async searchPhotos(term) {
+    if (!term) {
+      const photos = await this.api.searchPhotos(
+        this.searchTerm,
+        this.nextPage,
+        RESULTS_LIMIT,
+      );
+      runInAction(() => {
+        this.collections.appendItems(photos);
+        this.setLoading(false);
+      });
+    } else {
+      this.setPage(1);
+      const photos = await this.api.searchPhotos(
+        term,
+        this.nextPage,
+        RESULTS_LIMIT,
+      );
+      runInAction(() => {
+        this.collections.setItems(photos);
+        this.setLoading(false);
+      });
+    }
+  }
+
+  @action.bound
+  setSearchTerm(term) {
+    this.searchTerm = term;
+    this.loadItems(term);
+  }
+
+  @action.bound
+  setPage(page) {
+    this.nextPage = page;
+  }
+
+  @action.bound
+  setLoading(status) {
+    this.isLoading = status;
+  }
+
+  @action.bound
+  setError(error) {
+    this.error = error;
   }
 }
 

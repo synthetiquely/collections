@@ -4,26 +4,18 @@ import { inject, observer } from 'mobx-react';
 import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
 
-import * as constants from '../../constants';
-
-@inject('collections')
+@inject('collections', 'search')
 @observer
 class Collections extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: null,
-    };
     this.onClick = this.onClick.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onClose = this.onClose.bind(this);
   }
 
   onClick(index) {
-    return () =>
-      this.setState({
-        selected: index,
-      });
+    return () => this.props.collections.selectPhoto(index);
   }
 
   onChangeSelected(e, destination) {
@@ -32,51 +24,30 @@ class Collections extends Component {
       e.nativeEvent.stopImmediatePropagation();
     }
 
-    if (destination === constants.DESTINATION_NEXT) {
-      if (this.props.collections.photos[this.state.selected + 1]) {
-        this.setState(prevState => ({
-          selected: prevState.selected + 1,
-        }));
-      } else {
-        this.setState({
-          selected: 0,
-        });
-      }
-    } else if (destination === constants.DESTINATION_PREVIOUS) {
-      if (this.props.collections.photos[this.state.selected - 1]) {
-        this.setState(prevState => ({
-          selected: prevState.selected - 1,
-        }));
-      } else {
-        this.setState({
-          selected: this.props.collections.photos.length - 1,
-        });
-      }
-    }
+    this.props.collections.slideNext(destination);
   }
 
   onClose() {
-    this.setState({
-      selected: null,
-    });
+    this.props.collections.clearSelection();
   }
 
   render() {
-    const { selected } = this.state;
-
     return (
       <React.Fragment>
         <Views
           images={this.props.collections.photos}
-          isOpen={selected !== null}
-          isLoading={this.props.collections.isLoading}
-          loadItems={this.props.collections.loadItems}
+          isOpen={this.props.collections.selectedPhoto !== null}
+          isLoading={this.props.search.isLoading}
+          loadItems={this.props.search.loadItems}
           onClick={this.onClick}
         />
-        {selected !== null && (
+        {this.props.collections.selectedPhoto !== null && (
           <Preview
-            image={this.props.collections.photos[selected]}
-            description={this.props.collections.photos[selected].description}
+            image={
+              this.props.collections.photos[
+                this.props.collections.selectedPhoto
+              ]
+            }
             onClose={this.onClose}
             onChangeSelected={this.onChangeSelected}
           />

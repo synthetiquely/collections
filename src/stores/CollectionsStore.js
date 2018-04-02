@@ -1,54 +1,50 @@
-import { observable, action, runInAction } from 'mobx';
-import { RESULTS_LIMIT } from '../constants';
+import { observable, action } from 'mobx';
+import { DESTINATION_NEXT, DESTINATION_PREVIOUS } from '../constants';
 
 class CollectionsStore {
   @observable photos;
-  @observable isLoading;
-  @observable nextPage;
+  @observable selectedPhoto;
 
-  constructor(api) {
-    this.api = api;
+  constructor() {
     this.photos = [];
-    this.isLoading = false;
-    this.nextPage = 1;
-    this.loadItems();
-  }
-
-  /**
-   * TODO: Implement loadItems for a search term, if it is specified by user
-   */
-  @action.bound
-  async loadItems() {
-    this.isLoading = true;
-    try {
-      const photos = await this.api.getPhotos(
-        this.nextPage,
-        RESULTS_LIMIT,
-        'latest',
-      );
-      runInAction(() => {
-        this.photos = [...this.photos, ...photos];
-        this.nextPage += 1;
-      });
-    } catch (error) {
-      window.console.log('Error occured while trying to getPhotos', error);
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    this.selectedPhoto = null;
   }
 
   @action.bound
   setItems(items) {
     this.photos = items;
-    this.nextPage = 1;
   }
 
   @action.bound
-  clearItems() {
-    this.photos = [];
-    this.nextPage = 1;
+  appendItems(items) {
+    this.photos = [...this.photos, ...items];
+  }
+
+  @action.bound
+  selectPhoto(index) {
+    this.selectedPhoto = index || null;
+  }
+
+  @action.bound
+  slideNext(destination) {
+    if (destination === DESTINATION_NEXT) {
+      if (this.photos[this.selectedPhoto + 1]) {
+        this.selectPhoto(this.selectedPhoto + 1);
+      } else {
+        this.selectPhoto(0);
+      }
+    } else if (destination === DESTINATION_PREVIOUS) {
+      if (this.photos[this.selectedPhoto - 1]) {
+        this.selectPhoto(this.selectedPhoto - 1);
+      } else {
+        this.selectPhoto(this.photos.length - 1);
+      }
+    }
+  }
+
+  @action.bound
+  clearSelection() {
+    this.selectedPhoto = null;
   }
 }
 

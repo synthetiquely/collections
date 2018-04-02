@@ -29,7 +29,7 @@ class SearchForm extends Component {
       return;
     }
 
-    this.props.search.search(this.state.term);
+    this.props.search.setSearchTerm(this.state.term);
   }
 
   render() {
@@ -47,6 +47,7 @@ class SearchForm extends Component {
           Найти
         </Button>
       </Form>
+          <Button loading={this.props.search.isLoading} type="submit">
     );
   }
 }
