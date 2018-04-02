@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import Spinner from '../styled/Spinner';
-import CenteredContainer from '../styled/CenteredContainer';
+import Button from '../styled/Button';
+import Container from '../styled/Container';
 import { SCROLL_THESHOLD } from '../../constants';
 
 @observer
@@ -59,9 +60,16 @@ class InfiniteScoll extends Component {
       <div ref={this.setRef}>
         {this.props.children}
         {this.props.isLoading && (
-          <CenteredContainer>
+          <Container centered>
             <Spinner size="lg" />
-          </CenteredContainer>
+          </Container>
+        )}
+        {!this.props.isLoading && (
+          <Container centered fullWidth>
+            <Button size="fullWidth" onClick={this.loadMore}>
+              Загрузить еще
+            </Button>
+          </Container>
         )}
       </div>
     );
