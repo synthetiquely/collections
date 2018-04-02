@@ -4,8 +4,7 @@ import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 
 import unsplash from './api';
-import PhotosApi from './api/photosApi';
-import SearchApi from './api/searchApi';
+import Api from './api/Api';
 
 import CollectionsStore from './stores/CollectionsStore';
 import SearchStore from './stores/SearchStore';
@@ -17,11 +16,10 @@ configure({
   enforceActions: true,
 });
 
-const photosApi = new PhotosApi(unsplash);
-const searchApi = new SearchApi(unsplash);
+const api = new Api(unsplash);
 
-const collectionsStore = new CollectionsStore(photosApi);
-const searchStore = new SearchStore(searchApi, collectionsStore);
+const collectionsStore = new CollectionsStore();
+const searchStore = new SearchStore(api, collectionsStore);
 
 ReactDOM.render(
   <Provider collections={collectionsStore} search={searchStore}>

@@ -22,7 +22,10 @@ class InfiniteScoll extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onScroll, {
+      capture: true,
+      passive: true,
+    });
   }
 
   onScroll() {
