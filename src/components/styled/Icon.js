@@ -12,7 +12,7 @@ const Icon = glamorous.span(
     } else if (size === 'md') {
       styles.transform = 'scale(1.1)';
     } else if (size === 'lg') {
-      styles.fontSize = '28px';
+      styles.fontSize = '35px';
     }
     if (rotatable) {
       styles['@media (orientation: portrait)'] = {

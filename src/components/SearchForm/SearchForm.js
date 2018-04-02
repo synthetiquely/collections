@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import Form from '../styled/Form';
 import TextInput from '../styled/TextInput';
 import Button from '../styled/Button';
+import Error from '../Error/Error';
 
 @inject('search')
 @observer
@@ -34,20 +35,23 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        <TextInput
-          type="text"
-          id="search"
-          name="search"
-          placeholder="Поиск по коллекциям"
-          value={this.state.term}
-          onChange={this.onChange}
-        />
-        <Button loading={this.props.search.isLoading} type="submit">
-          Найти
-        </Button>
-      </Form>
+      <React.Fragment>
+        <Form onSubmit={this.onSubmit}>
+          <TextInput
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Поиск по коллекциям"
+            autoFocus
+            value={this.state.term}
+            onChange={this.onChange}
+          />
           <Button loading={this.props.search.isLoading} type="submit">
+            Найти
+          </Button>
+        </Form>
+        {this.props.search.error && <Error>{this.props.search.error}</Error>}
+      </React.Fragment>
     );
   }
 }

@@ -4,7 +4,7 @@ const Layout = glamorous.div({
   height: '100%',
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gridTemplateRows: '80px 1fr auto',
+  gridTemplateRows: '120px 1fr auto',
   gridTemplateAreas: `
       "header"
       "content"
