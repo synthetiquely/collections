@@ -5,4 +5,5 @@ export const SIZE_RATIO = 150;
 export const DESTINATION_PREVIOUS = 'DESTINATION_PREVIOUS';
 export const DESTINATION_NEXT = 'DESTINATION_NEXT';
 export const SCROLL_THESHOLD = 500;
-export const RESULTS_LIMIT = 30;
+export const AVERAGE_IMAGE_HEIGHT = 150;
+export const AVERAGE_IMAGE_WIDTH = 150;

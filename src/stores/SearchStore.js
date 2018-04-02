@@ -1,9 +1,10 @@
 import { observable, action, runInAction } from 'mobx';
-import { RESULTS_LIMIT } from '../constants';
+import { calculatePaginationLimit } from '../utils/imageUtils';
 
 class SearchStore {
   @observable searchTerm;
   @observable nextPage;
+  @observable limit;
   @observable isLoading;
   @observable error;
 
@@ -14,11 +15,13 @@ class SearchStore {
     this.nextPage = 1;
     this.isLoading = false;
     this.error = null;
+    this.recalculateLimit();
     this.loadItems();
   }
 
   @action.bound
   loadItems(term) {
+    this.recalculateLimit();
     try {
       this.setLoading(true);
       this.setError(null);
@@ -38,7 +41,7 @@ class SearchStore {
 
   @action.bound
   async fetchPhotos() {
-    const photos = await this.api.getPhotos(this.nextPage, RESULTS_LIMIT);
+    const photos = await this.api.getPhotos(this.nextPage, this.limit);
     runInAction(() => {
       this.collections.appendItems(photos);
 
@@ -55,7 +58,7 @@ class SearchStore {
     const photos = await this.api.searchPhotos(
       term || this.searchTerm,
       this.nextPage,
-      RESULTS_LIMIT,
+      this.limit,
     );
     runInAction(() => {
       if (term) {
@@ -86,6 +89,11 @@ class SearchStore {
   @action.bound
   setError(error) {
     this.error = error;
+  }
+
+  @action.bound
+  recalculateLimit() {
+    this.limit = calculatePaginationLimit();
   }
 }
 
