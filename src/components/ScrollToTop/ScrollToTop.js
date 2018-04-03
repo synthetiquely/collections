@@ -39,10 +39,12 @@ class ScrollToTop extends Component {
       document.body.scrollTop > 20 ||
       document.documentElement.scrollTop > 20
     ) {
-      this.setState({
-        show: true,
-      });
-    } else {
+      if (!this.state.show) {
+        this.setState({
+          show: true,
+        });
+      }
+    } else if (this.state.show) {
       this.setState({
         show: false,
       });
