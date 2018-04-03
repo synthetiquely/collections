@@ -65,8 +65,8 @@ class InfiniteScoll extends Component {
           </Container>
         )}
         {!this.props.isLoading && (
-          <Container centered fullWidth>
-            <Button size="fullWidth" onClick={this.loadMore}>
+          <Container style={{ marginTop: '45px' }} centered fullWidth>
+            <Button inverted size="fullWidth" onClick={this.loadMore}>
               Загрузить еще
             </Button>
           </Container>

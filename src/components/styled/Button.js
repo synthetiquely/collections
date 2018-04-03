@@ -18,12 +18,23 @@ const Button = glamorous.button(
     backgroundColor: '#fff',
     cursor: 'pointer',
   },
-  ({ size }) => {
+  ({ size, inverted }) => {
     let styles = {};
     if (size === 'fullWidth') {
       styles = {
+        ...styles,
         width: '100%',
       };
+      if (inverted) {
+        styles = {
+          ...styles,
+          ':hover,:active,:focus': {
+            backgroundColor: '#ffdb4d',
+            color: '#fff',
+            borderColor: '#ffd35f',
+          },
+        };
+      }
     }
     return styles;
   },

@@ -66,7 +66,9 @@ class Preview extends Component {
     return (
       <Modal {...rest}>
         <Swipe onSwipe={this.onSwipe}>
-          <Image src={image.src} alt={image.description} />
+          <a href={image.url} target="_blank">
+            <Image src={image.src} alt={image.description} />
+          </a>
         </Swipe>
       </Modal>
     );
