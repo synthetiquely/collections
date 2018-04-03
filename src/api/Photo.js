@@ -6,7 +6,8 @@ class Photo {
     this.width = props.width;
     this.height = props.height;
     this.url = props.links.html;
-    this.src = props.urls.regular;
+    this.src = props.urls.small;
+    this.fullsrc = props.urls.regular;
     this.user = {
       id: props.user.id,
       name: props.user.name,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import ImageContainer from './ImageContainer';
-import Image from './Image';
+import Image from '../styled/Image';
 
 @observer
 class View extends Component {

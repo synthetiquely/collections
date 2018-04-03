@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import glamorous from 'glamorous';
 import Modal from '../Modal/Modal';
 import Swipe from '../Swipe/Swipe';
+import Image from '../styled/Image';
+
 import {
   DESTINATION_PREVIOUS,
   DESTINATION_NEXT,
@@ -11,18 +12,14 @@ import {
   KEY_ESC,
 } from '../../constants';
 
-const Image = glamorous.img({
-  maxWidth: '75vw',
-  maxHeight: '75vh',
-  objectFit: 'contain',
-});
-
 const body = document.getElementsByTagName('body')[0];
 
 @observer
 class Preview extends Component {
   constructor(props) {
     super(props);
+    this.state = { loaded: false };
+    this.onLoad = this.onLoad.bind(this);
     this.onSwipe = this.onSwipe.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
   }
@@ -61,13 +58,35 @@ class Preview extends Component {
     }
   }
 
+  onLoad() {
+    this.setState({
+      loaded: true,
+    });
+  }
+
   render() {
     const { image, ...rest } = this.props;
+    const { loaded } = this.state;
     return (
       <Modal {...rest}>
         <Swipe onSwipe={this.onSwipe}>
           <a href={image.url} target="_blank">
-            <Image src={image.src} alt={image.description} />
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                backgroundColor: loaded ? 'transparent' : image.color,
+              }}
+            >
+              <Image
+                maxWidth="75vw"
+                maxHeight="75vh"
+                loaded={loaded}
+                src={image.fullsrc}
+                alt={image.description}
+                onLoad={this.onLoad}
+              />
+            </div>
           </a>
         </Swipe>
       </Modal>
