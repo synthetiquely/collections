@@ -11,14 +11,15 @@ const Button = glamorous.button(
     padding: '10px',
     color: '#000',
     border: '1px solid #ccc',
+    outline: 'none',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
     ':hover,:active,:focus': {
       borderLeft: '1px solid',
       borderColor: '#ffdb4d',
     },
-    backgroundColor: '#fff',
-    cursor: 'pointer',
   },
-  ({ size, inverted }) => {
+  ({ size, inverted, bordered }) => {
     let styles = {};
     if (size === 'fullWidth') {
       styles = {
@@ -33,6 +34,12 @@ const Button = glamorous.button(
             color: '#fff',
             borderColor: '#ffd35f',
           },
+        };
+      }
+      if (bordered) {
+        styles = {
+          ...styles,
+          borderRadius: '10px',
         };
       }
     }

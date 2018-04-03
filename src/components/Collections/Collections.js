@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 
 import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 @inject('collections', 'search')
 @observer
@@ -52,6 +53,7 @@ class Collections extends Component {
             onChangeSelected={this.onChangeSelected}
           />
         )}
+        {this.props.collections.selectedPhoto === null && <ScrollToTop />}
       </React.Fragment>
     );
   }
