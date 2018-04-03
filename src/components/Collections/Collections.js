@@ -13,6 +13,31 @@ class Collections extends Component {
     this.onClick = this.onClick.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.onResize = this.onResize.bind(this);
+
+    this.onResize();
+    this.props.search.loadItems();
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize, { passive: true });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize, { passive: true });
+  }
+
+  onResize() {
+    const clientHeight = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0,
+    );
+    const clientWidth = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0,
+    );
+
+    this.props.search.recalculateLimit(clientHeight, clientWidth);
   }
 
   onClick(index) {

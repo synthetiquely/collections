@@ -15,12 +15,10 @@ class SearchStore {
     this.nextPage = 1;
     this.isLoading = false;
     this.error = null;
-    this.loadItems();
   }
 
   @action.bound
   loadItems(term) {
-    this.recalculateLimit();
     try {
       this.setLoading(true);
       this.setError(null);
@@ -91,8 +89,8 @@ class SearchStore {
   }
 
   @action.bound
-  recalculateLimit() {
-    this.limit = calculatePaginationLimit();
+  recalculateLimit(clientHeight, clientWidth) {
+    this.limit = calculatePaginationLimit(clientHeight, clientWidth);
   }
 }
 

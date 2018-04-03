@@ -55,14 +55,5 @@ export const imagesLoaded = (parentNode) => {
  * square of the current client window size divided by square of an average image size
  * @return {number} approximated limit
  */
-export const calculatePaginationLimit = () => {
-  const clientHeight = Math.max(
-    document.documentElement.clientWidth,
-    window.innerWidth || 0,
-  );
-  const clientWidth = Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0,
-  );
-  return Math.round(clientHeight * clientWidth / (AVERAGE_IMAGE_HEIGHT * AVERAGE_IMAGE_WIDTH));
-};
+export const calculatePaginationLimit = (clientHeight, clientWidth) =>
+  Math.round(clientHeight * clientWidth / (AVERAGE_IMAGE_HEIGHT * AVERAGE_IMAGE_WIDTH));
