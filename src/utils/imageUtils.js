@@ -53,7 +53,9 @@ export const imagesLoaded = (parentNode) => {
 /**
  * Calculates a posible pagination limit based on the following:
  * square of the current client window size divided by square of an average image size
- * @return {number} approximated limit
+ * @param {number} clientHeight
+ * @param {number} clientWidth
+ * @returns {number} approximated limit
  */
 export const calculatePaginationLimit = (clientHeight, clientWidth) =>
   Math.round(clientHeight * clientWidth / (AVERAGE_IMAGE_HEIGHT * AVERAGE_IMAGE_WIDTH));
