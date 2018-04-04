@@ -43,7 +43,7 @@ const ArrowButton = glamorous.button(
       return {
         right: '0',
         borderRadius: '0 3px 3px 0',
-        '@media only screen and (max-width: 1024px) and (orientation: portrait)': {
+        '@media only screen and (max-width: 1750px) and (orientation: portrait)': {
           bottom: '0',
           margin: '0',
         },
@@ -52,7 +52,7 @@ const ArrowButton = glamorous.button(
       return {
         left: '0%',
         borderRadius: '3px 0 0 3px',
-        '@media only screen and (max-width: 1024px) and (orientation: portrait)': {
+        '@media only screen and (max-width: 1750px) and (orientation: portrait)': {
           top: '0%',
           margin: '0',
         },
