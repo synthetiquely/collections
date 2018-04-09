@@ -1,5 +1,4 @@
 import glamorous from 'glamorous';
-import { SIZE_RATIO } from '../../constants';
 
 const ImageContainer = glamorous.div(
   {
@@ -10,11 +9,9 @@ const ImageContainer = glamorous.div(
       boxShadow: '1px 1px 1px #ccc',
     },
   },
-  ({ height, width, color }) => {
+  ({ size, color }) => {
     const styles = {};
-    if (height && width) {
-      const size = Math.floor(width * SIZE_RATIO / height);
-
+    if (size) {
       styles.flexGrow = size;
       styles.width = `${size}px`;
     }

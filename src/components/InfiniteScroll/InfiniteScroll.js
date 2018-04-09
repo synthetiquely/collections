@@ -66,7 +66,7 @@ class InfiniteScoll extends Component {
         )}
         {!this.props.isLoading && (
           <Container
-            style={{ marginTop: '10%' }}
+            style={{ marginTop: '5%' }}
             centered
             fullWidth
             mobileInvisible
