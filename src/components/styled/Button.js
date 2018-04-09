@@ -4,6 +4,7 @@ import Spinner from './Spinner';
 
 const Button = glamorous.button(
   {
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -49,7 +50,7 @@ const Button = glamorous.button(
 
 export default ({ loading, ...rest }) => (
   <Button {...rest}>
-    {loading && <Spinner size="sm" />}{' '}
+    {loading && <Spinner button size="sm" />}{' '}
     <span style={{ padding: '0 15px' }}>{rest.children}</span>
   </Button>
 );

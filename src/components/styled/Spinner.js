@@ -2,7 +2,7 @@ import React from 'react';
 import glamorous from 'glamorous';
 import { css } from 'glamor';
 
-const animationStyles = ({ size }) => {
+const animationStyles = ({ size, button }) => {
   const spin = css.keyframes({
     '0%': { transform: 'rotate(0deg)' },
     '100%': { transform: 'rotate(360deg)' },
@@ -15,6 +15,12 @@ const animationStyles = ({ size }) => {
     borderRadius: '50%',
     animation: `${spin} 1s linear infinite`,
   };
+
+  if (button) {
+    styles.position = 'absolute';
+    styles.top = '20%';
+    styles.left = '0%';
+  }
 
   if (size === 'sm') {
     styles.width = '10px';
