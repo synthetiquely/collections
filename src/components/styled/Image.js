@@ -4,31 +4,18 @@ const Image = glamorous.img(
   {
     opacity: '0',
     width: '100%',
+    maxHeight: '90vh',
     objectFit: 'contain',
     verticalAlign: 'bottom',
     willChange: 'opacity',
-    transition: 'opacity 2s',
+    transition: 'opacity 1s',
   },
-  ({ loaded, maxWidth, maxHeight }) => {
+  ({ loaded }) => {
     let styles = {};
     if (loaded) {
       styles = {
         ...styles,
         opacity: '1',
-      };
-    }
-
-    if (maxWidth) {
-      styles = {
-        ...styles,
-        maxWidth,
-      };
-    }
-
-    if (maxHeight) {
-      styles = {
-        ...styles,
-        maxHeight,
       };
     }
 

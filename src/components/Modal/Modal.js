@@ -29,7 +29,13 @@ const Modal = props => (
           &#10094;
         </Icon>
       </ArrowButton>
-      <ModalContent>{props.children}</ModalContent>
+      <ModalContent
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
+        color={props.bgColor}
+      >
+        {props.children}
+      </ModalContent>
     </ModalWindow>
   </Backdrop>
 );

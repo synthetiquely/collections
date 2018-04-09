@@ -6,10 +6,22 @@ const blowUp = css.keyframes({
   '100%': { transform: 'scale(1)' },
 });
 
-const ModalContent = glamorous.div({
-  padding: '30px',
-  backgroundColor: '#f6f5f3',
-  animation: `${blowUp} .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards`,
-});
+const ModalContent = glamorous.div(
+  {
+    willChange: 'backgroundColor',
+    transition: '0.5s ease',
+    animation: `${blowUp} .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards`,
+  },
+  ({ color }) => {
+    if (color) {
+      return {
+        backgroundColor: color,
+      };
+    }
+    return {
+      backgroundColor: 'transparent',
+    };
+  },
+);
 
 export default ModalContent;

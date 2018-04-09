@@ -13,9 +13,3 @@ body {
 .overlayed {
   overflow: hidden;
 }
-
-@media (max-width: '500px') {
-  .mobile-invisible {
-    display: none !important;
-  }
-}

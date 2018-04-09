@@ -74,33 +74,26 @@ class Preview extends Component {
   }
 
   render() {
-    const { image, ...rest } = this.props;
     const { showTooltip, loaded } = this.state;
     return (
-      <Modal {...rest}>
+      <Modal
+        bgColor={!loaded && this.props.image.color}
+        onMouseEnter={this.onMouseMove}
+        onMouseLeave={this.onMouseMove}
+        {...this.props}
+      >
         <Swipe onSwipe={this.onSwipe}>
-          <a href={image.url} target="_blank">
-            <div
-              onMouseEnter={this.onMouseMove}
-              onMouseLeave={this.onMouseMove}
-              style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: loaded ? 'transparent' : image.color,
-              }}
-            >
-              <Image
-                maxWidth="75vw"
-                maxHeight="75vh"
-                loaded={loaded}
-                src={image.fullsrc}
-                alt={image.description}
-                onLoad={this.onLoad}
-              />
-              <Tooltip showTooltip={showTooltip}>
-                <TooltipText>{image.user.username}</TooltipText>
-              </Tooltip>
-            </div>
+          <a href={this.props.image.url} target="_blank">
+            <Image
+              style={{ width: 'auto', maxWidth: '100%' }}
+              loaded={loaded}
+              src={this.props.image.fullsrc}
+              alt={this.props.image.description}
+              onLoad={this.onLoad}
+            />
+            <Tooltip showTooltip={showTooltip}>
+              <TooltipText>{this.props.image.user.username}</TooltipText>
+            </Tooltip>
           </a>
         </Swipe>
       </Modal>
