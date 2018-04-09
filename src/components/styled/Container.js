@@ -5,7 +5,7 @@ const Container = glamorous.div(
     display: 'flex',
     padding: '10px 0',
   },
-  ({ centered, fullWidth }) => {
+  ({ centered, fullWidth, mobileInvisible }) => {
     let styles = {};
     if (centered) {
       styles = {
@@ -13,10 +13,20 @@ const Container = glamorous.div(
         justifyContent: 'center',
         alignItems: 'center',
       };
-    } else if (fullWidth) {
+    }
+    if (fullWidth) {
       styles = {
         ...styles,
         width: '100%',
+      };
+    }
+
+    if (mobileInvisible) {
+      styles = {
+        ...styles,
+        '@media (max-width: 500px)': {
+          display: 'none',
+        },
       };
     }
     return styles;

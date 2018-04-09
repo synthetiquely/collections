@@ -66,10 +66,10 @@ class InfiniteScoll extends Component {
         )}
         {!this.props.isLoading && (
           <Container
-            className="mobile-invisible"
-            style={{ marginTop: '45px' }}
+            style={{ marginTop: '10%' }}
             centered
             fullWidth
+            mobileInvisible
           >
             <Button inverted size="fullWidth" onClick={this.loadMore}>
               Загрузить еще
