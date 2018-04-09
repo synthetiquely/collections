@@ -23,6 +23,12 @@ class Api {
   searchPhotos = (keyword, ...options) =>
     this.api.search
       .photos(keyword, ...options)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('API is currently unavailable. Please try again later.');
+        }
+        return response;
+      })
       .then(toJson)
       .then(json => json.results.map(data => new Photo(data)));
 
@@ -34,6 +40,12 @@ class Api {
   getPhotos = (...options) =>
     this.api.photos
       .listPhotos(...options)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('API is currently unavailable. Please try again later.');
+        }
+        return response;
+      })
       .then(toJson)
       .then(json => json.map(data => new Photo(data)));
 }

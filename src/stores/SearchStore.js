@@ -18,19 +18,19 @@ class SearchStore {
   }
 
   @action.bound
-  loadItems(term) {
+  async loadItems(term) {
     try {
       this.setLoading(true);
       this.setError(null);
       if (!this.searchTerm && !term) {
-        this.fetchPhotos();
+        await this.fetchPhotos();
       } else {
-        this.searchPhotos(term);
+        await this.searchPhotos(term);
       }
       this.setPage(this.nextPage + 1);
     } catch (error) {
       runInAction(() => {
-        this.setError(error);
+        this.setError(error.toString());
         this.setLoading(false);
       });
     }
