@@ -20,7 +20,6 @@ const ArrowButton = glamorous.button(
     fontSize: '20px',
     backgroundColor: 'rgba(0,0,0,.4)',
     border: 'none',
-    transition: '0.6s ease',
     cursor: 'pointer',
     userSelect: 'none',
     ':hover,:active,:focus': {
@@ -50,10 +49,10 @@ const ArrowButton = glamorous.button(
       };
     } else if (direction === 'left') {
       return {
-        left: '0%',
+        left: '0',
         borderRadius: '3px 0 0 3px',
         '@media only screen and (max-width: 1750px) and (orientation: portrait)': {
-          top: '0%',
+          top: '0',
           margin: '0',
         },
       };

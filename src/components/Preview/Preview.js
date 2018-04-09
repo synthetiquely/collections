@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import Modal from '../Modal/Modal';
 import Swipe from '../Swipe/Swipe';
 import Image from '../styled/Image';
+import Tooltip from '../styled/Tooltip';
+import TooltipText from '../styled/TooltipText';
 
 import {
   DESTINATION_PREVIOUS,
@@ -18,9 +20,10 @@ const body = document.getElementsByTagName('body')[0];
 class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false };
+    this.state = { showTooltip: false, loaded: false };
     this.onLoad = this.onLoad.bind(this);
     this.onSwipe = this.onSwipe.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
   }
 
@@ -58,6 +61,12 @@ class Preview extends Component {
     }
   }
 
+  onMouseMove() {
+    this.setState(prevState => ({
+      showTooltip: !prevState.showTooltip,
+    }));
+  }
+
   onLoad() {
     this.setState({
       loaded: true,
@@ -66,12 +75,14 @@ class Preview extends Component {
 
   render() {
     const { image, ...rest } = this.props;
-    const { loaded } = this.state;
+    const { showTooltip, loaded } = this.state;
     return (
       <Modal {...rest}>
         <Swipe onSwipe={this.onSwipe}>
           <a href={image.url} target="_blank">
             <div
+              onMouseEnter={this.onMouseMove}
+              onMouseLeave={this.onMouseMove}
               style={{
                 width: '100%',
                 height: '100%',
@@ -86,6 +97,9 @@ class Preview extends Component {
                 alt={image.description}
                 onLoad={this.onLoad}
               />
+              <Tooltip showTooltip={showTooltip}>
+                <TooltipText>{image.user.username}</TooltipText>
+              </Tooltip>
             </div>
           </a>
         </Swipe>
