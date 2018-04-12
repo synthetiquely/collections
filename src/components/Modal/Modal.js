@@ -8,14 +8,14 @@ import CloseButton from '../styled/CloseButton';
 import Icon from '../styled/Icon';
 
 const Modal = props => (
-  <Backdrop onClick={props.onClose}>
+  <Backdrop>
     <ModalWindow>
       <CloseButton onClick={props.onClose}>
         <Icon size="lg">&times;</Icon>
       </CloseButton>
       <ArrowButton
         direction="right"
-        onClick={e => props.onChangeSelected(e, DESTINATION_NEXT)}
+        onClick={() => props.onChangeSelected(DESTINATION_NEXT)}
       >
         <Icon rotatable size="md">
           &#10095;
@@ -23,7 +23,7 @@ const Modal = props => (
       </ArrowButton>
       <ArrowButton
         direction="left"
-        onClick={e => props.onChangeSelected(e, DESTINATION_PREVIOUS)}
+        onClick={() => props.onChangeSelected(DESTINATION_PREVIOUS)}
       >
         <Icon rotatable size="md">
           &#10094;

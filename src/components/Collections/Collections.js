@@ -44,12 +44,7 @@ class Collections extends Component {
     return () => this.props.collections.selectPhoto(index);
   }
 
-  onChangeSelected(e, destination) {
-    if (e) {
-      e.stopPropagation();
-      e.nativeEvent.stopImmediatePropagation();
-    }
-
+  onChangeSelected(destination) {
     this.props.collections.slideNext(destination);
   }
 

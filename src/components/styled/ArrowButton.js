@@ -3,7 +3,6 @@ import { css } from 'glamor';
 
 const unfould = css.keyframes({
   '0%': { transform: 'scaleY(0) scaleX(0)' },
-  '50%': { transform: 'scaleY(0) scaleX(1)' },
   '100%': { transform: 'scaleY(1) scaleX(1)' },
 });
 
