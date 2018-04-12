@@ -29,12 +29,12 @@ class Preview extends Component {
 
   componentDidMount() {
     body.classList.add('overlayed');
-    document.addEventListener('keydown', this.onKeyDown);
+    document.body.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
     body.classList.remove('overlayed');
-    document.removeEventListener('keydown', this.onKeyDown);
+    document.body.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown(e) {
@@ -42,10 +42,10 @@ class Preview extends Component {
       // eslint-disable-next-line
       switch (e.keyCode) {
         case KEY_ARROW_LEFT:
-          this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
+          this.props.onChangeSelected(DESTINATION_PREVIOUS);
           break;
         case KEY_ARROW_RIGHT:
-          this.props.onChangeSelected(null, DESTINATION_NEXT);
+          this.props.onChangeSelected(DESTINATION_NEXT);
           break;
         case KEY_ESC:
           this.props.onClose();
@@ -55,9 +55,9 @@ class Preview extends Component {
 
   onSwipe(direction) {
     if (direction === 'left' || direction === 'down') {
-      this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
+      this.props.onChangeSelected(DESTINATION_PREVIOUS);
     } else if (direction === 'right' || direction === 'up') {
-      this.props.onChangeSelected(null, DESTINATION_NEXT);
+      this.props.onChangeSelected(DESTINATION_NEXT);
     }
   }
 
