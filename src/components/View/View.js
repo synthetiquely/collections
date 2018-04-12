@@ -44,6 +44,7 @@ class View extends Component {
 
     return (
       <ImageContainer
+        tabIndex={0}
         size={size}
         color={errored && this.props.image.color}
         onClick={this.props.onClick}
