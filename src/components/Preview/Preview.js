@@ -91,9 +91,11 @@ class Preview extends Component {
               alt={this.props.image.description}
               onLoad={this.onLoad}
             />
-            <Tooltip showTooltip={showTooltip}>
-              <TooltipText>{this.props.image.user.username}</TooltipText>
-            </Tooltip>
+            {loaded && (
+              <Tooltip showTooltip={showTooltip}>
+                <TooltipText>{this.props.image.user.username}</TooltipText>
+              </Tooltip>
+            )}
           </a>
         </Swipe>
       </Modal>

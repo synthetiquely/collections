@@ -11,6 +11,13 @@ const Tooltip = glamorous.div(
     willChange: 'opacity, left',
     backgroundColor: 'rgba(0,0,0,0.7)',
     transition: 'all 0.3s ease-in-out',
+    '@media only screen and (max-width: 1024px)': {
+      opacity: '1',
+      bottom: '10px',
+      left: '0px',
+      width: '150px',
+      height: '60px',
+    },
   },
   ({ showTooltip }) => {
     let styles = {};
