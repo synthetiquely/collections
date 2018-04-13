@@ -6,7 +6,7 @@ const TooltipText = glamorous.h1({
   fontWeight: '300',
   lineHeight: '60px',
   margin: '0',
-  padding: '0 0 0 10px',
+  padding: '0 10px',
 });
 
 export default TooltipText;
