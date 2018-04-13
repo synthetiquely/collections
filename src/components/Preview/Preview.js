@@ -85,7 +85,7 @@ class Preview extends Component {
         <Swipe onSwipe={this.onSwipe}>
           <a href={this.props.image.url} target="_blank">
             <Image
-              style={{ width: 'auto', maxWidth: '100%' }}
+              style={{ width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
               loaded={loaded}
               src={this.props.image.fullsrc}
               alt={this.props.image.description}

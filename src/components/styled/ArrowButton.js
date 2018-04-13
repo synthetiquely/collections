@@ -35,6 +35,9 @@ const ArrowButton = glamorous.button(
       width: 'auto',
       height: '100%',
     },
+    '@media only screen and (max-width: 500px)': {
+      padding: '10px',
+    },
   },
   ({ direction }) => {
     if (direction === 'right') {

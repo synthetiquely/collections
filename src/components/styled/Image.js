@@ -5,7 +5,6 @@ const Image = glamorous.img(
     opacity: '0',
     width: '100%',
     maxHeight: '90vh',
-    objectFit: 'contain',
     verticalAlign: 'bottom',
     willChange: 'opacity',
     transition: 'opacity 1s',
