@@ -15,7 +15,7 @@ const Tooltip = glamorous.div(
       opacity: '1',
       bottom: '10px',
       left: '0px',
-      width: '150px',
+      width: 'auto',
       height: '60px',
     },
   },
