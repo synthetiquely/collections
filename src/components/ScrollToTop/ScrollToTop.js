@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { css } from 'glamor';
 import Button from '../styled/Button';
 import Icon from '../styled/Icon';
+import { SCROLL_TO_TOP_LIMIT } from '../../constants';
 
 const styles = css({
   position: 'fixed',
@@ -28,16 +29,13 @@ class ScrollToTop extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('scroll', this.onScroll, {
-      passive: true,
-      capture: true,
-    });
+    document.removeEventListener('scroll', this.onScroll, true);
   }
 
   onScroll() {
     if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
+      document.body.scrollTop > SCROLL_TO_TOP_LIMIT ||
+      document.documentElement.scrollTop > SCROLL_TO_TOP_LIMIT
     ) {
       if (!this.state.show) {
         this.setState({
@@ -60,7 +58,7 @@ class ScrollToTop extends Component {
 
   render() {
     const { show } = this.state;
-    if (show) {
+    if (show && this.props.show) {
       return (
         <div className={styles} title="Вернуться наверх">
           <Button bordered inverted type="button" onClick={this.onClick}>

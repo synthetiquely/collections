@@ -19,21 +19,27 @@ class SearchStore {
 
   @action.bound
   async loadItems(term) {
-    try {
+    if (!this.isLoading) {
       this.setLoading(true);
       this.setError(null);
-      if (!this.searchTerm && !term) {
-        await this.fetchPhotos();
-      } else {
-        await this.searchPhotos(term);
+      let response = {};
+      try {
+        if (!this.searchTerm && !term) {
+          response = await this.fetchPhotos();
+        } else {
+          response = await this.searchPhotos(term);
+        }
+        this.setPage(this.nextPage + 1);
+        return response;
+      } catch (error) {
+        runInAction(() => {
+          this.setError(error.toString());
+          this.setLoading(false);
+        });
       }
-      this.setPage(this.nextPage + 1);
-    } catch (error) {
-      runInAction(() => {
-        this.setError(error.toString());
-        this.setLoading(false);
-      });
+      return response;
     }
+    return null;
   }
 
   @action.bound

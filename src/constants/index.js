@@ -7,3 +7,4 @@ export const DESTINATION_NEXT = 'DESTINATION_NEXT';
 export const SCROLL_THESHOLD = 500;
 export const AVERAGE_IMAGE_HEIGHT = 150;
 export const AVERAGE_IMAGE_WIDTH = 230;
+export const SCROLL_TO_TOP_LIMIT = 20;

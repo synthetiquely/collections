@@ -4,10 +4,12 @@ import { DESTINATION_NEXT, DESTINATION_PREVIOUS } from '../constants';
 class CollectionsStore {
   @observable photos;
   @observable selectedPhoto;
+  @observable selectedPhotoIndex;
 
   constructor() {
     this.photos = [];
     this.selectedPhoto = null;
+    this.selectedPhotoIndex = null;
   }
 
   @action.bound
@@ -21,23 +23,24 @@ class CollectionsStore {
   }
 
   @action.bound
-  selectPhoto(index) {
-    this.selectedPhoto = index;
+  selectPhoto(id) {
+    this.selectedPhotoIndex = this.photos.findIndex(photo => photo.id === id);
+    this.selectedPhoto = this.photos[this.selectedPhotoIndex];
   }
 
   @action.bound
   slideNext(destination) {
     if (destination === DESTINATION_NEXT) {
-      if (this.photos[this.selectedPhoto + 1]) {
-        this.selectPhoto(this.selectedPhoto + 1);
+      if (this.photos[this.selectedPhotoIndex + 1]) {
+        this.selectPhoto(this.photos[this.selectedPhotoIndex + 1].id);
       } else {
-        this.selectPhoto(0);
+        this.selectPhoto(this.photos[0].id);
       }
     } else if (destination === DESTINATION_PREVIOUS) {
-      if (this.photos[this.selectedPhoto - 1]) {
-        this.selectPhoto(this.selectedPhoto - 1);
+      if (this.photos[this.selectedPhotoIndex - 1]) {
+        this.selectPhoto(this.photos[this.selectedPhotoIndex - 1].id);
       } else {
-        this.selectPhoto(this.photos.length - 1);
+        this.selectPhoto(this.photos[this.photos.length - 1]);
       }
     }
   }
@@ -45,6 +48,7 @@ class CollectionsStore {
   @action.bound
   clearSelection() {
     this.selectedPhoto = null;
+    this.selectedPhotoIndex = null;
   }
 }
 

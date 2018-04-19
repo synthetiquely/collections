@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import Spinner from '../styled/Spinner';
-import Button from '../styled/Button';
 import Container from '../styled/Container';
 import { SCROLL_THESHOLD } from '../../constants';
 
@@ -23,10 +22,7 @@ class InfiniteScoll extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, {
-      capture: true,
-      passive: true,
-    });
+    window.removeEventListener('scroll', this.onScroll, true);
   }
 
   onScroll() {
@@ -62,18 +58,6 @@ class InfiniteScoll extends Component {
         {this.props.isLoading && (
           <Container centered>
             <Spinner size="lg" />
-          </Container>
-        )}
-        {!this.props.isLoading && (
-          <Container
-            style={{ marginTop: '5%' }}
-            centered
-            fullWidth
-            mobileInvisible
-          >
-            <Button inverted size="fullWidth" onClick={this.loadMore}>
-              Загрузить еще
-            </Button>
           </Container>
         )}
       </div>

@@ -19,8 +19,8 @@ const Views = observer(({
   }
 
   const renderItems = () =>
-    images.map((item, index) => (
-      <View image={item} key={item.id} onClick={onClick(index)} />
+    images.map(item => (
+      <View image={item} key={item.id} onClick={onClick(item.id)} />
     ));
 
   return (

@@ -14,17 +14,16 @@ class Collections extends Component {
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onResize = this.onResize.bind(this);
-
-    this.onResize();
-    this.props.search.loadItems();
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.onResize, { passive: true });
+    this.onResize();
+    this.props.search.loadItems();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize, { passive: true });
+    window.removeEventListener('resize', this.onResize);
   }
 
   onResize() {
@@ -40,8 +39,8 @@ class Collections extends Component {
     this.props.search.recalculateLimit(clientHeight, clientWidth);
   }
 
-  onClick(index) {
-    return () => this.props.collections.selectPhoto(index);
+  onClick(id) {
+    return () => this.props.collections.selectPhoto(id);
   }
 
   onChangeSelected(destination) {
@@ -62,18 +61,12 @@ class Collections extends Component {
           loadItems={this.props.search.loadItems}
           onClick={this.onClick}
         />
-        {this.props.collections.selectedPhoto !== null && (
-          <Preview
-            image={
-              this.props.collections.photos[
-                this.props.collections.selectedPhoto
-              ]
-            }
-            onClose={this.onClose}
-            onChangeSelected={this.onChangeSelected}
-          />
-        )}
-        {this.props.collections.selectedPhoto === null && <ScrollToTop />}
+        <Preview
+          collections={this.props.collections}
+          onClose={this.onClose}
+          onChangeSelected={this.onChangeSelected}
+        />
+        <ScrollToTop show={this.props.collections.selectedPhoto === null} />
       </React.Fragment>
     );
   }

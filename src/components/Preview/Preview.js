@@ -14,8 +14,6 @@ import {
   KEY_ESC,
 } from '../../constants';
 
-const body = document.getElementsByTagName('body')[0];
-
 @observer
 class Preview extends Component {
   constructor(props) {
@@ -28,12 +26,18 @@ class Preview extends Component {
   }
 
   componentDidMount() {
-    body.classList.add('overlayed');
     document.body.addEventListener('keydown', this.onKeyDown);
   }
 
+  componentDidUpdate() {
+    if (this.props.collections.selectedPhoto) {
+      document.body.classList.add('overlayed');
+    } else {
+      document.body.classList.remove('overlayed');
+    }
+  }
+
   componentWillUnmount() {
-    body.classList.remove('overlayed');
     document.body.removeEventListener('keydown', this.onKeyDown);
   }
 
@@ -75,25 +79,32 @@ class Preview extends Component {
 
   render() {
     const { showTooltip, loaded } = this.state;
+
+    if (!this.props.collections.selectedPhoto) {
+      return null;
+    }
+
     return (
       <Modal
-        bgColor={!loaded && this.props.image.color}
-        onMouseEnter={this.onMouseMove}
-        onMouseLeave={this.onMouseMove}
+        bgColor={!loaded && this.props.collections.selectedPhoto.color}
         {...this.props}
       >
         <Swipe onSwipe={this.onSwipe}>
-          <a href={this.props.image.url} target="_blank">
+          <a href={this.props.collections.selectedPhoto.url} target="_blank">
             <Image
               style={{ width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
               loaded={loaded}
-              src={this.props.image.fullsrc}
-              alt={this.props.image.description}
+              src={this.props.collections.selectedPhoto.fullsrc}
+              alt={this.props.collections.selectedPhoto.description}
               onLoad={this.onLoad}
+              onMouseEnter={this.onMouseMove}
+              onMouseLeave={this.onMouseMove}
             />
             {loaded && (
               <Tooltip showTooltip={showTooltip}>
-                <TooltipText>{this.props.image.user.username}</TooltipText>
+                <TooltipText>
+                  {this.props.collections.selectedPhoto.user.username}
+                </TooltipText>
               </Tooltip>
             )}
           </a>
