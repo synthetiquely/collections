@@ -10,6 +10,7 @@ install:
 - yarn
 script:
 - yarn lint
+- yarn test
 before_deploy:
 - yarn build
 - echo "Initializing deployment..."
