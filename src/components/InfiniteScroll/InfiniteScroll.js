@@ -56,7 +56,7 @@ class InfiniteScoll extends Component {
       <div ref={this.setRef}>
         {this.props.children}
         {this.props.isLoading && (
-          <Container centered>
+          <Container style={{ margin: '150px 0' }} centered>
             <Spinner size="lg" />
           </Container>
         )}
