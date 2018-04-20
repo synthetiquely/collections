@@ -1,29 +1,34 @@
 # Collections
->Collections of images on different topics
+>Collections of images on different topics.
 
 ## Installation
+>Please note, that in order to start the app locally on your machine, you need to specify api keys. Please see *.env.example* for a reference.
 ```bash
-# to install all dependencies
+# to install all dependencies.
 yarn
 
-# to start the app. It will open a window at *localhost:3000*
+# to start the app. It will open a window at *localhost:3000*.
 yarn start
 
-# Please read *package.json* for more available options
+# Please read *package.json* for more available options.
 ```
 
 ## Description
-Collections is an web application, which displays images of various topics in a convenient way. Images is preseneted as a gallery (grid) of tiles. User has an option to click on a specific image to see it in a full sized mode. User also has an option to search and filter images.
+Collections is a web application, which displays images of various topics in a convenient way. Images is preseneted as a gallery (grid) of tiles of a different width and height. User has an option to click on a specific image to see it in a full sized mode. User also has an option to search and filter images.
 
-## Technologies
+API used: [unsplash.com](https://unsplash.com/documentation).
+
+## Technologies used
 
 * React
-* Redux
-* Redux-Observable
+* Mobx
+* Mobx-React
 * Glamorous
+* Jest
+* Webpack
 
 ## Demo
-Demo is available [here](https://synthetiquely.github.io/collections/)
+Demo is available [here](https://synthetiquely.github.io/collections/).
 
 ## Author
 [Anatoly Belobrovik](https://github.com/synthetiquely/)

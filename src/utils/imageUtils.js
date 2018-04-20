@@ -1,3 +1,5 @@
+import { AVERAGE_IMAGE_HEIGHT, AVERAGE_IMAGE_WIDTH } from '../constants';
+
 /**
  * Find out orientation, width and height of a given image
  * @param {string} src - souce of an image
@@ -47,3 +49,13 @@ export const imagesLoaded = (parentNode) => {
 
   return isLoaded;
 };
+
+/**
+ * Calculates a posible pagination limit based on the following:
+ * square of the current client window size divided by square of an average image size
+ * @param {number} clientHeight
+ * @param {number} clientWidth
+ * @returns {number} approximated limit
+ */
+export const calculatePaginationLimit = (clientHeight, clientWidth) =>
+  Math.round(clientHeight * clientWidth / (AVERAGE_IMAGE_HEIGHT * AVERAGE_IMAGE_WIDTH));

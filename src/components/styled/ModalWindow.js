@@ -16,9 +16,6 @@ const ModalWindow = glamorous.div({
     width: '90vh',
     height: '90vh',
   },
-  '@media only screen and (max-width: 1024px)': {
-    padding: '10px',
-  },
 });
 
 export default ModalWindow;

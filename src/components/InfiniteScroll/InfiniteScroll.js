@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import Spinner from '../styled/Spinner';
-import CenteredContainer from '../styled/CenteredContainer';
+import Container from '../styled/Container';
 import { SCROLL_THESHOLD } from '../../constants';
 
+@observer
 class InfiniteScoll extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: false };
     this.container = null;
     this.onScroll = this.onScroll.bind(this);
     this.setRef = this.setRef.bind(this);
@@ -21,11 +22,11 @@ class InfiniteScoll extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onScroll, true);
   }
 
   onScroll() {
-    if (this.container && !this.state.loading) {
+    if (this.container && !this.props.isLoading) {
       const containerHeight = this.container.clientHeight;
       const scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
@@ -35,9 +36,6 @@ class InfiniteScoll extends Component {
         document.body.clientHeight;
 
       if (scrollTop + windowHeight >= containerHeight - SCROLL_THESHOLD) {
-        this.setState({
-          loading: true,
-        });
         this.loadMore();
       }
     }
@@ -48,17 +46,19 @@ class InfiniteScoll extends Component {
   }
 
   loadMore() {
-    this.setState({ loading: false });
+    if (!this.props.isLoading) {
+      this.props.loadMore();
+    }
   }
 
   render() {
     return (
-      <div style={{ overflow: 'auto' }} ref={this.setRef}>
+      <div ref={this.setRef}>
         {this.props.children}
-        {this.state.loading && (
-          <CenteredContainer>
-            <Spinner />
-          </CenteredContainer>
+        {this.props.isLoading && (
+          <Container style={{ margin: '150px 0' }} centered>
+            <Spinner size="lg" />
+          </Container>
         )}
       </div>
     );

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import api from './api';
-
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
@@ -17,7 +15,7 @@ const App = () => (
       <SearchForm />
     </Header>
     <Content>
-      <Collections images={api} />
+      <Collections />
     </Content>
     <Footer>
       <Paragraph>
@@ -26,6 +24,9 @@ const App = () => (
           public repository
         </Link>{' '}
         for more details.
+        <br />
+        Please note, that images, that are listed above may be subject to
+        copyright.
       </Paragraph>
     </Footer>
   </Layout>

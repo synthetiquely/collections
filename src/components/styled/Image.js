@@ -4,17 +4,21 @@ const Image = glamorous.img(
   {
     opacity: '0',
     width: '100%',
-    verticalAlign: 'bottom',
+    maxHeight: '90vh',
+    verticalAlign: 'top',
     willChange: 'opacity',
-    transition: 'opacity 2s',
+    transition: 'opacity 1s',
   },
   ({ loaded }) => {
+    let styles = {};
     if (loaded) {
-      return {
+      styles = {
+        ...styles,
         opacity: '1',
       };
     }
-    return {};
+
+    return styles;
   },
 );
 

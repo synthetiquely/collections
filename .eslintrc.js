@@ -1,5 +1,6 @@
 module.exports = {
   extends: 'airbnb',
+  parser: 'babel-eslint',
   env: {
     browser: true,
     node: true,
@@ -10,5 +11,6 @@ module.exports = {
     'class-methods-use-this': [0],
     'no-mixed-operators': [0],
     'default-case': [0],
+    'import/no-unresolved': [0],
   },
 };

@@ -1,86 +1,63 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 
 import Views from '../Views/Views';
 import Preview from '../Preview/Preview';
-import InfiniteScroll from '../InfiniteScroll/InfiniteScroll';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
-import * as constants from '../../constants';
-
+@inject('collections', 'search')
+@observer
 class Collections extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: null,
-    };
     this.onClick = this.onClick.bind(this);
-    this.onChangeSelected = this.onChangeSelected.bind(this);
-    this.onClose = this.onClose.bind(this);
+    this.onResize = this.onResize.bind(this);
   }
 
-  onClick(index) {
-    return () =>
-      this.setState({
-        selected: index,
-      });
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize, { passive: true });
+    this.onResize();
+    this.props.search.loadItems();
   }
 
-  onChangeSelected(e, destination) {
-    if (e) {
-      e.stopPropagation();
-      e.nativeEvent.stopImmediatePropagation();
-    }
-
-    const { images } = this.props;
-    if (destination === constants.DESTINATION_NEXT) {
-      if (images[this.state.selected + 1]) {
-        this.setState(prevState => ({
-          selected: prevState.selected + 1,
-        }));
-      } else {
-        this.setState({
-          selected: 0,
-        });
-      }
-    } else if (destination === constants.DESTINATION_PREVIOUS) {
-      if (images[this.state.selected - 1]) {
-        this.setState(prevState => ({
-          selected: prevState.selected - 1,
-        }));
-      } else {
-        this.setState({
-          selected: images.length - 1,
-        });
-      }
-    }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
   }
 
-  onClose() {
-    this.setState({
-      selected: null,
-    });
+  onResize() {
+    const clientHeight = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0,
+    );
+    const clientWidth = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0,
+    );
+
+    this.props.search.recalculateLimit(clientHeight, clientWidth);
+  }
+
+  onClick(id) {
+    return () => this.props.collections.selectPhoto(id);
   }
 
   render() {
-    const { selected } = this.state;
-    const { images } = this.props;
-
     return (
-      <InfiniteScroll>
+      <React.Fragment>
         <Views
-          images={images}
-          isOpen={selected !== null}
+          images={this.props.collections.photos}
+          isOpen={this.props.collections.selectedPhoto !== null}
+          isLoading={this.props.search.isLoading}
+          loadItems={this.props.search.loadItems}
           onClick={this.onClick}
         />
-        {selected !== null && (
-          <Preview
-            src={images[selected].src}
-            id={images[selected].id}
-            title={images[selected].title}
-            onClose={this.onClose}
-            onChangeSelected={this.onChangeSelected}
-          />
-        )}
-      </InfiniteScroll>
+        <Preview
+          collections={this.props.collections}
+          onClose={this.onClose}
+          onChangeSelected={this.onChangeSelected}
+        />
+        <ScrollToTop show={this.props.collections.selectedPhoto === null} />
+      </React.Fragment>
     );
   }
 }

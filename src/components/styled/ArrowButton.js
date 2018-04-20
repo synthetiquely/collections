@@ -3,7 +3,6 @@ import { css } from 'glamor';
 
 const unfould = css.keyframes({
   '0%': { transform: 'scaleY(0) scaleX(0)' },
-  '50%': { transform: 'scaleY(0) scaleX(1)' },
   '100%': { transform: 'scaleY(1) scaleX(1)' },
 });
 
@@ -20,7 +19,6 @@ const ArrowButton = glamorous.button(
     fontSize: '20px',
     backgroundColor: 'rgba(0,0,0,.4)',
     border: 'none',
-    transition: '0.6s ease',
     cursor: 'pointer',
     userSelect: 'none',
     ':hover,:active,:focus': {
@@ -37,23 +35,26 @@ const ArrowButton = glamorous.button(
       width: 'auto',
       height: '100%',
     },
+    '@media only screen and (max-width: 500px)': {
+      padding: '10px',
+    },
   },
   ({ direction }) => {
     if (direction === 'right') {
       return {
         right: '0',
         borderRadius: '0 3px 3px 0',
-        '@media only screen and (max-width: 500px) and (orientation: portrait)': {
+        '@media only screen and (max-width: 1750px) and (orientation: portrait)': {
           bottom: '0',
           margin: '0',
         },
       };
     } else if (direction === 'left') {
       return {
-        left: '0%',
+        left: '0',
         borderRadius: '3px 0 0 3px',
-        '@media only screen and (max-width: 500px) and (orientation: portrait)': {
-          top: '0%',
+        '@media only screen and (max-width: 1750px) and (orientation: portrait)': {
+          top: '0',
           margin: '0',
         },
       };

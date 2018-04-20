@@ -1,42 +1,58 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import ImageContainer from './ImageContainer';
-import Image from './Image';
+import Image from '../styled/Image';
+import { SIZE_RATIO } from '../../constants';
 
+@observer
 class View extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.image.height && nextProps.image.width) {
+      const size = Math.round(nextProps.image.width / nextProps.image.height * SIZE_RATIO);
+
+      if (size !== prevState.size) {
+        return {
+          size,
+        };
+      }
+    }
+
+    return null;
+  }
+
   constructor(props) {
     super(props);
-    this.state = { loaded: false };
-    this.width = 0;
-    this.height = 0;
+    this.state = { size: 0, loaded: false, errored: false };
     this.onLoad = this.onLoad.bind(this);
     this.onError = this.onError.bind(this);
   }
 
-  onLoad(event) {
-    /**
-     * Due to the fact that img width and height will be known in advance
-     * as soon as we bring API to our app,
-     * we could remove this lines of code.
-     */
-    this.width = event.target.naturalWidth || event.target.width;
-    this.height = event.target.naturalHeight || event.target.height;
+  onLoad() {
     this.setState({
       loaded: true,
     });
   }
 
-  // @TODO: handle error case
-  onError() {}
+  onError() {
+    this.setState({
+      errored: true,
+    });
+  }
 
   render() {
-    const { src, title, onClick } = this.props;
+    const { size, loaded, errored } = this.state;
 
     return (
-      <ImageContainer onClick={onClick} width={this.width} height={this.height}>
+      <ImageContainer
+        tabIndex={0}
+        size={size}
+        color={errored && this.props.image.color}
+        onClick={this.props.onClick}
+      >
         <Image
-          src={src}
-          alt={title}
-          loaded={this.state.loaded}
+          src={this.props.image.src}
+          alt={this.props.image.description}
+          loaded={loaded}
           onLoad={this.onLoad}
           onError={this.onError}
         />

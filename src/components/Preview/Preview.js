@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import glamorous from 'glamorous';
+import { observer } from 'mobx-react';
 import Modal from '../Modal/Modal';
 import Swipe from '../Swipe/Swipe';
+import Image from '../styled/Image';
+import Tooltip from '../styled/Tooltip';
+import TooltipText from '../styled/TooltipText';
+
 import {
   DESTINATION_PREVIOUS,
   DESTINATION_NEXT,
@@ -10,29 +14,51 @@ import {
   KEY_ESC,
 } from '../../constants';
 
-const Image = glamorous.img({
-  width: '100%',
-  height: '100%',
-  objectFit: 'contain',
-});
-
-const body = document.getElementsByTagName('body')[0];
-
+@observer
 class Preview extends Component {
   constructor(props) {
     super(props);
+    this.state = { showTooltip: false, loaded: false };
+    this.onLoad = this.onLoad.bind(this);
     this.onSwipe = this.onSwipe.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onChangeSelected = this.onChangeSelected.bind(this);
   }
 
   componentDidMount() {
-    body.classList.add('overlayed');
-    document.addEventListener('keydown', this.onKeyDown);
+    document.body.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentDidUpdate() {
+    if (this.props.collections.selectedPhoto) {
+      document.body.classList.add('overlayed');
+    } else {
+      document.body.classList.remove('overlayed');
+    }
   }
 
   componentWillUnmount() {
-    body.classList.remove('overlayed');
-    document.removeEventListener('keydown', this.onKeyDown);
+    document.body.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  onLoad() {
+    this.setState({
+      loaded: true,
+    });
+  }
+
+  onChangeSelected(destination) {
+    this.props.collections.slideNext(destination);
+  }
+
+  onClose() {
+    this.props.collections.clearSelection();
+    this.setState({
+      loaded: false,
+      showTooltip: false,
+    });
   }
 
   onKeyDown(e) {
@@ -40,31 +66,62 @@ class Preview extends Component {
       // eslint-disable-next-line
       switch (e.keyCode) {
         case KEY_ARROW_LEFT:
-          this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
+          this.onChangeSelected(DESTINATION_PREVIOUS);
           break;
         case KEY_ARROW_RIGHT:
-          this.props.onChangeSelected(null, DESTINATION_NEXT);
+          this.onChangeSelected(DESTINATION_NEXT);
           break;
         case KEY_ESC:
-          this.props.onClose();
+          this.onClose();
       }
     }
   }
 
+  onMouseMove() {
+    this.setState(prevState => ({
+      showTooltip: !prevState.showTooltip,
+    }));
+  }
+
   onSwipe(direction) {
     if (direction === 'left' || direction === 'down') {
-      this.props.onChangeSelected(null, DESTINATION_PREVIOUS);
+      this.onChangeSelected(DESTINATION_PREVIOUS);
     } else if (direction === 'right' || direction === 'up') {
-      this.props.onChangeSelected(null, DESTINATION_NEXT);
+      this.onChangeSelected(DESTINATION_NEXT);
     }
   }
 
   render() {
-    const { src, title, ...rest } = this.props;
+    const { showTooltip, loaded } = this.state;
+
+    if (!this.props.collections.selectedPhoto) {
+      return null;
+    }
+
     return (
-      <Modal {...rest}>
+      <Modal
+        bgColor={!loaded && this.props.collections.selectedPhoto.color}
+        {...this.props}
+        onClose={this.onClose}
+        onChangeSelected={this.onChangeSelected}
+      >
         <Swipe onSwipe={this.onSwipe}>
-          <Image src={src} alt={title} />
+          <a href={this.props.collections.selectedPhoto.url} target="_blank">
+            <Image
+              style={{ width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
+              loaded={loaded}
+              src={this.props.collections.selectedPhoto.fullsrc}
+              alt={this.props.collections.selectedPhoto.description}
+              onLoad={this.onLoad}
+              onMouseEnter={this.onMouseMove}
+              onMouseLeave={this.onMouseMove}
+            />
+            <Tooltip showTooltip={showTooltip && loaded}>
+              <TooltipText>
+                {this.props.collections.selectedPhoto.user.username}
+              </TooltipText>
+            </Tooltip>
+          </a>
         </Swipe>
       </Modal>
     );
