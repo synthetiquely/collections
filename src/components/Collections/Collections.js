@@ -11,8 +11,6 @@ class Collections extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
-    this.onChangeSelected = this.onChangeSelected.bind(this);
-    this.onClose = this.onClose.bind(this);
     this.onResize = this.onResize.bind(this);
   }
 
@@ -41,14 +39,6 @@ class Collections extends Component {
 
   onClick(id) {
     return () => this.props.collections.selectPhoto(id);
-  }
-
-  onChangeSelected(destination) {
-    this.props.collections.slideNext(destination);
-  }
-
-  onClose() {
-    this.props.collections.clearSelection();
   }
 
   render() {

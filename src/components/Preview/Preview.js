@@ -23,6 +23,8 @@ class Preview extends Component {
     this.onSwipe = this.onSwipe.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onChangeSelected = this.onChangeSelected.bind(this);
   }
 
   componentDidMount() {
@@ -41,27 +43,37 @@ class Preview extends Component {
     document.body.removeEventListener('keydown', this.onKeyDown);
   }
 
+  onLoad() {
+    this.setState({
+      loaded: true,
+    });
+  }
+
+  onChangeSelected(destination) {
+    this.props.collections.slideNext(destination);
+  }
+
+  onClose() {
+    this.props.collections.clearSelection();
+    this.setState({
+      loaded: false,
+      showTooltip: false,
+    });
+  }
+
   onKeyDown(e) {
     if (e.keyCode) {
       // eslint-disable-next-line
       switch (e.keyCode) {
         case KEY_ARROW_LEFT:
-          this.props.onChangeSelected(DESTINATION_PREVIOUS);
+          this.onChangeSelected(DESTINATION_PREVIOUS);
           break;
         case KEY_ARROW_RIGHT:
-          this.props.onChangeSelected(DESTINATION_NEXT);
+          this.onChangeSelected(DESTINATION_NEXT);
           break;
         case KEY_ESC:
-          this.props.onClose();
+          this.onClose();
       }
-    }
-  }
-
-  onSwipe(direction) {
-    if (direction === 'left' || direction === 'down') {
-      this.props.onChangeSelected(DESTINATION_PREVIOUS);
-    } else if (direction === 'right' || direction === 'up') {
-      this.props.onChangeSelected(DESTINATION_NEXT);
     }
   }
 
@@ -71,10 +83,12 @@ class Preview extends Component {
     }));
   }
 
-  onLoad() {
-    this.setState({
-      loaded: true,
-    });
+  onSwipe(direction) {
+    if (direction === 'left' || direction === 'down') {
+      this.onChangeSelected(DESTINATION_PREVIOUS);
+    } else if (direction === 'right' || direction === 'up') {
+      this.onChangeSelected(DESTINATION_NEXT);
+    }
   }
 
   render() {
@@ -88,6 +102,8 @@ class Preview extends Component {
       <Modal
         bgColor={!loaded && this.props.collections.selectedPhoto.color}
         {...this.props}
+        onClose={this.onClose}
+        onChangeSelected={this.onChangeSelected}
       >
         <Swipe onSwipe={this.onSwipe}>
           <a href={this.props.collections.selectedPhoto.url} target="_blank">
@@ -100,13 +116,11 @@ class Preview extends Component {
               onMouseEnter={this.onMouseMove}
               onMouseLeave={this.onMouseMove}
             />
-            {loaded && (
-              <Tooltip showTooltip={showTooltip}>
-                <TooltipText>
-                  {this.props.collections.selectedPhoto.user.username}
-                </TooltipText>
-              </Tooltip>
-            )}
+            <Tooltip showTooltip={showTooltip && loaded}>
+              <TooltipText>
+                {this.props.collections.selectedPhoto.user.username}
+              </TooltipText>
+            </Tooltip>
           </a>
         </Swipe>
       </Modal>
