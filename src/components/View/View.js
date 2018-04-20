@@ -8,7 +8,7 @@ import { SIZE_RATIO } from '../../constants';
 class View extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.image.height && nextProps.image.width) {
-      const size = Math.floor(nextProps.image.width / nextProps.image.height * SIZE_RATIO);
+      const size = Math.round(nextProps.image.width / nextProps.image.height * SIZE_RATIO);
 
       if (size !== prevState.size) {
         return {
