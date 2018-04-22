@@ -88,6 +88,19 @@ describe('Collections Store', () => {
     expect(store.selectedPhotoIndex).toEqual(initialIndex - 1);
   });
 
+  it('should select a sibling photo based on the direction of slide', () => {
+    const store = new CollectionsStore();
+    const initialIndex = 1;
+    store.photos = items;
+    store.selectedPhoto = items[initialIndex];
+    store.selectedPhotoIndex = initialIndex;
+
+    store.slideNext(DESTINATION_NEXT);
+
+    expect(store.selectedPhoto).toEqual(items[initialIndex + 1]);
+    expect(store.selectedPhotoIndex).toEqual(initialIndex + 1);
+  });
+
   it('should select the first image, if a selected image is the last item in the array', () => {
     const store = new CollectionsStore();
     const initialIndex = items.length - 1;

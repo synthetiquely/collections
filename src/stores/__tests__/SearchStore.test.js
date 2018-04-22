@@ -14,8 +14,12 @@ describe('Search Store', () => {
   ];
   const mockCollections = {
     photos: [],
-    setItems: jest.fn(),
-    appendItems: jest.fn(photos => this.photos.push(photos)),
+    setItems: jest.fn((photos) => {
+      mockCollections.photos = photos;
+    }),
+    appendItems: jest.fn((photos) => {
+      mockCollections.photos = [...mockCollections.photos, ...photos];
+    }),
   };
 
   const mockApi = {
@@ -23,8 +27,15 @@ describe('Search Store', () => {
       new Promise((resolve) => {
         resolve(items);
       })),
-    searchPhotos: jest.fn(),
+    searchPhotos: jest.fn(() =>
+      new Promise((resolve) => {
+        resolve(items);
+      })),
   };
+
+  beforeEach(() => {
+    mockCollections.photos = [];
+  });
 
   it('should have an initial state', () => {
     const store = new SearchStore(mockApi, mockCollections);
@@ -84,14 +95,57 @@ describe('Search Store', () => {
     expect(store.limit).toBeDefined();
   });
 
-  // it('should fetch photos', async () => {
-  //   const store = new SearchStore(mockApi, mockCollections);
-  //   const isLoading = true;
-  //   store.isLoading = isLoading;
+  it('should fetch photos', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const isLoading = true;
+    store.isLoading = isLoading;
 
-  //   await store.fetchPhotos();
+    await store.fetchPhotos();
 
-  //   expect(store.isLoading).toBeFalsy();
-  //   expect(store.collections.photos).toHaveLength(items.length);
-  // });
+    expect(store.isLoading).toBeFalsy();
+    expect(store.collections.photos).toHaveLength(items.length);
+  });
+
+  it('should fetch photos', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const isLoading = true;
+    store.isLoading = isLoading;
+
+    await store.fetchPhotos();
+
+    expect(store.isLoading).toBeFalsy();
+    expect(store.collections.photos).toHaveLength(items.length);
+  });
+  it('should search for photos with a specified search term', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const initItems = [{ id: '0' }];
+    const term = 'Cats';
+    const isLoading = true;
+    store.collections.photos = initItems;
+    store.nextPage = 3;
+    store.isLoading = isLoading;
+
+    await store.searchPhotos(term);
+
+    expect(store.isLoading).toBeFalsy();
+    expect(store.nextPage).toEqual(1);
+    expect(store.collections.photos).toHaveLength(items.length);
+  });
+
+  it('should append items when the search term has not changed', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const initItems = [{ id: '0' }];
+    const isLoading = true;
+    const nextPage = 3;
+    store.collections.photos = initItems;
+    store.term = 'Cats';
+    store.nextPage = nextPage;
+    store.isLoading = isLoading;
+
+    await store.searchPhotos();
+
+    expect(store.isLoading).toBeFalsy();
+    expect(store.nextPage).toEqual(nextPage);
+    expect(store.collections.photos).toHaveLength(initItems.length + items.length);
+  });
 });
