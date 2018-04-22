@@ -50,7 +50,7 @@ class SearchForm extends Component {
             Найти
           </Button>
         </Form>
-        {this.props.search.error && <Error>{this.props.search.error}</Error>}
+        {this.props.search.error && <Error />}
       </React.Fragment>
     );
   }
