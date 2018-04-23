@@ -138,7 +138,7 @@ describe('Search Store', () => {
     const isLoading = true;
     const nextPage = 3;
     store.collections.photos = initItems;
-    store.term = 'Cats';
+    store.searchTerm = 'Cats';
     store.nextPage = nextPage;
     store.isLoading = isLoading;
 
@@ -147,5 +147,47 @@ describe('Search Store', () => {
     expect(store.isLoading).toBeFalsy();
     expect(store.nextPage).toEqual(nextPage);
     expect(store.collections.photos).toHaveLength(initItems.length + items.length);
+  });
+
+  it('should do nothing, if the application is already in loading state', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const isLoading = true;
+    store.isLoading = isLoading;
+
+    const response = await store.loadItems();
+
+    expect(response).toBeNull();
+  });
+
+  it('should evoke fetchPhotos method, if there is no search term', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+
+    await store.loadItems();
+
+    expect(store.api.getPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.error).toBeNull();
+    expect(store.nextPage).toEqual(2);
+  });
+
+  it('should evoke searchPhotos method, if there is a search term in state', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    store.searchTerm = 'Cats';
+
+    await store.loadItems();
+
+    expect(store.api.searchPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.error).toBeNull();
+    expect(store.nextPage).toEqual(2);
+  });
+
+  it('should evoke searchPhotos method, if there is a search term in state', async () => {
+    const store = new SearchStore(mockApi, mockCollections);
+    const term = 'Cats';
+
+    await store.loadItems(term);
+
+    expect(store.api.searchPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.error).toBeNull();
+    expect(store.nextPage).toEqual(2);
   });
 });
