@@ -164,7 +164,7 @@ describe('Search Store', () => {
 
     await store.loadItems();
 
-    expect(store.api.getPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.api.getPhotos).toHaveBeenCalled();
     expect(store.error).toBeNull();
     expect(store.nextPage).toEqual(2);
   });
@@ -175,7 +175,7 @@ describe('Search Store', () => {
 
     await store.loadItems();
 
-    expect(store.api.searchPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.api.searchPhotos).toHaveBeenCalled();
     expect(store.error).toBeNull();
     expect(store.nextPage).toEqual(2);
   });
@@ -186,7 +186,7 @@ describe('Search Store', () => {
 
     await store.loadItems(term);
 
-    expect(store.api.searchPhotos.mock.calls.length).toBeGreaterThanOrEqual(1);
+    expect(store.api.searchPhotos).toHaveBeenCalled();
     expect(store.error).toBeNull();
     expect(store.nextPage).toEqual(2);
   });
