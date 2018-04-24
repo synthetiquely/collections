@@ -36,7 +36,7 @@ const animationStyles = ({ size, button }) => {
   return styles;
 };
 
-const Overlay = glamorous.div({
+export const Overlay = glamorous.div({
   position: 'fixed',
   top: '0',
   right: '0',

@@ -12,11 +12,11 @@ const collections = {
   photos: [],
   selectedPhoto: null,
   selectedPhotoIndex: null,
-  setItems: () => ({}),
-  appendItems: () => ({}),
-  selectPhoto: () => ({}),
-  slideNext: () => ({}),
-  clearSelection: () => ({}),
+  setItems: jest.fn(),
+  appendItems: jest.fn(),
+  selectPhoto: jest.fn(),
+  slideNext: jest.fn(),
+  clearSelection: jest.fn(),
 };
 
 const search = {
@@ -26,14 +26,14 @@ const search = {
   nextPage: 1,
   isLoading: false,
   error: null,
-  loadItems: () => ({}),
-  fetchPhotos: () => ({}),
-  searchPhotos: () => ({}),
-  setSearchTerm: () => ({}),
-  setPage: () => ({}),
-  setLoading: () => ({}),
-  setError: () => ({}),
-  recalculateLimit: () => ({}),
+  loadItems: jest.fn(),
+  fetchPhotos: jest.fn(),
+  searchPhotos: jest.fn(),
+  setSearchTerm: jest.fn(),
+  setPage: jest.fn(),
+  setLoading: jest.fn(),
+  setError: jest.fn(),
+  recalculateLimit: jest.fn(),
 };
 
 describe('App component', () => {

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component should render and match its own snapshot 1`] = `
+<div
+  className="css-3hsllp"
+>
+  <div
+    className="css-13la5a5"
+  >
+    <button
+      className="css-hcjupp"
+      onClick={undefined}
+    >
+      <span
+        className="css-16yzkgv"
+      >
+        ×
+      </span>
+    </button>
+    <button
+      className="css-10e1v19"
+      onClick={[Function]}
+    >
+      <span
+        className="css-937lsz"
+      >
+        ❯
+      </span>
+    </button>
+    <button
+      className="css-1cvb4bz"
+      onClick={[Function]}
+    >
+      <span
+        className="css-937lsz"
+      >
+        ❮
+      </span>
+    </button>
+    <div
+      className="css-1web6nd"
+      onMouseEnter={undefined}
+      onMouseLeave={undefined}
+    />
+  </div>
+</div>
+`;

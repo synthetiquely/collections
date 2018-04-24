@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Swipe Component should render and match its own snapshot 1`] = `
+<div
+  className="css-zmgijg"
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+/>
+`;
