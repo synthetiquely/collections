@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
-import App from './App';
-import Layout from './components/Layout/Layout';
-import Header from './components/Header/Header';
-import Content from './components/Content/Content';
-import Footer from './components/Footer/Footer';
+import App from '../App';
+import Layout from '../components/Layout/Layout';
+import Header from '../components/Header/Header';
+import Content from '../components/Content/Content';
+import Footer from '../components/Footer/Footer';
 
 const collections = {
   photos: [],

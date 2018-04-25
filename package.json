@@ -29,6 +29,9 @@
     "jest": "20.0.4",
     "mobx": "^4.2.0",
     "mobx-react": "^5.0.0",
+    "mocha": "^5.1.1",
+    "niffy": "^0.2.0",
+    "nightmare": "^3.0.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -54,6 +57,7 @@
     "deploy": "node scripts/deploy.js",
     "test": "node scripts/test.js --env=jsdom",
     "test:coverage": "node scripts/test.js --env=jsdom --coverage",
+    "test:e2e": "jest src/__tests__/e2e_tests/e2e.test.js",
     "lint": "eslint ./src/**/*.j*",
     "prettier": "prettier --write --config ./.prettierrc ./src/**/*.j*"
   },
