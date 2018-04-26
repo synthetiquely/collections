@@ -57,7 +57,7 @@
     "predeploy": "yarn build",
     "deploy": "node scripts/deploy.js",
     "test": "node scripts/test.js --env=jsdom",
-    "test:coverage": "node scripts/test.js --env=jsdom --coverage",
+    "test:coverage": "node scripts/test.js --env=jsdom --coverage --silent",
     "lint": "eslint ./src/**/*.j*",
     "prettier": "prettier --write --config ./.prettierrc ./src/**/*.j*"
   },
