@@ -58,7 +58,7 @@
     "deploy": "node scripts/deploy.js",
     "test": "concurrently \"yarn start\" \"node scripts/test.js --env=jsdom\"",
     "test:coverage":
-      "concurrently \"yarn start\" \"node scripts/test.js --env=jsdom --coverage",
+      "concurrently \"yarn start\" \"node scripts/test.js --env=jsdom --coverage\"",
     "lint": "eslint ./src/**/*.j*",
     "prettier": "prettier --write --config ./.prettierrc ./src/**/*.j*"
   },
