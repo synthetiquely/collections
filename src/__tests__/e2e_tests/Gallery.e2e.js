@@ -45,14 +45,22 @@ describe('Image Gallery', () => {
       });
     });
 
-    it('should open a modal window with an image', async () => {
-      await co(function* () {
-        return yield niffy.test('/', async (nightmare) => {
-          await co(function* () {
-            return yield nightmare.click('img').wait('#preview-modal');
+    it(
+      'should open a modal window with an image',
+      async () => {
+        await co(function* () {
+          return yield niffy.test('/', async (nightmare) => {
+            await co(function* () {
+              return yield nightmare
+                .click('img')
+                .wait('#preview-modal')
+                .wait(3000)
+                .end();
+            });
           });
         });
-      });
-    });
+      },
+      ASYNC_CALLBACK_TIMEOUT,
+    );
   });
 });
