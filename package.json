@@ -13,6 +13,7 @@
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
+    "co": "^4.6.0",
     "css-loader": "0.28.7",
     "dotenv": "^5.0.1",
     "dotenv-expand": "4.2.0",
@@ -55,9 +56,9 @@
     "build": "node scripts/build.js",
     "predeploy": "yarn build",
     "deploy": "node scripts/deploy.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "test:coverage": "node scripts/test.js --env=jsdom --coverage",
-    "test:e2e": "jest src/__tests__/e2e_tests/e2e.test.js",
+    "test": "concurrently \"yarn start\" \"node scripts/test.js --env=jsdom\"",
+    "test:coverage":
+      "concurrently \"yarn start\" \"node scripts/test.js --env=jsdom --coverage",
     "lint": "eslint ./src/**/*.j*",
     "prettier": "prettier --write --config ./.prettierrc ./src/**/*.j*"
   },
@@ -74,13 +75,8 @@
     "stylelint-config-standard": "^18.2.0"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js",
-      "<rootDir>/test-setup.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js", "<rootDir>/test-setup.js"],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -90,11 +86,10 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
+        "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -109,11 +104,7 @@
     ]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      "transform-decorators-legacy"
-    ]
+    "presets": ["react-app"],
+    "plugins": ["transform-decorators-legacy"]
   }
 }

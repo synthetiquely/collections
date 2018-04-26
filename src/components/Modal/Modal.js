@@ -9,11 +9,12 @@ import Icon from '../styled/Icon';
 
 const Modal = props => (
   <Backdrop>
-    <ModalWindow>
-      <CloseButton onClick={props.onClose}>
+    <ModalWindow id="preview-modal">
+      <CloseButton id="preview-close-button" onClick={props.onClose}>
         <Icon size="lg">&times;</Icon>
       </CloseButton>
       <ArrowButton
+        id="preview-right-arrow"
         direction="right"
         onClick={() => props.onChangeSelected(DESTINATION_NEXT)}
       >
@@ -22,6 +23,7 @@ const Modal = props => (
         </Icon>
       </ArrowButton>
       <ArrowButton
+        id="preview-left-arrow"
         direction="left"
         onClick={() => props.onChangeSelected(DESTINATION_PREVIOUS)}
       >

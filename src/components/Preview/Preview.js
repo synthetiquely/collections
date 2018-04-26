@@ -116,11 +116,13 @@ class Preview extends Component {
               onMouseEnter={this.onMouseMove}
               onMouseLeave={this.onMouseMove}
             />
-            <Tooltip showTooltip={showTooltip && loaded}>
-              <TooltipText>
-                {this.props.collections.selectedPhoto.user.username}
-              </TooltipText>
-            </Tooltip>
+            {loaded && (
+              <Tooltip id="preview-tooltip" showTooltip={showTooltip && loaded}>
+                <TooltipText>
+                  {this.props.collections.selectedPhoto.user.username}
+                </TooltipText>
+              </Tooltip>
+            )}
           </a>
         </Swipe>
       </Modal>

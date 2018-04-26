@@ -13,5 +13,6 @@ module.exports = {
     'no-mixed-operators': [0],
     'default-case': [0],
     'import/no-unresolved': [0],
+    'func-names': [0],
   },
 };

@@ -35,6 +35,7 @@ describe('Preview Component', () => {
 
   it('should render an image, if there is a seleted photo in the store', () => {
     const wrapper = mount(<Preview {...props} />);
+    wrapper.setState({ loaded: true, showTooltip: true });
 
     expect(wrapper.find(Modal)).toHaveLength(1);
     expect(wrapper.find(Image)).toHaveLength(1);

@@ -6,9 +6,11 @@ exports[`Modal Component should render and match its own snapshot 1`] = `
 >
   <div
     className="css-13la5a5"
+    id="preview-modal"
   >
     <button
       className="css-hcjupp"
+      id="preview-close-button"
       onClick={undefined}
     >
       <span
@@ -19,6 +21,7 @@ exports[`Modal Component should render and match its own snapshot 1`] = `
     </button>
     <button
       className="css-10e1v19"
+      id="preview-right-arrow"
       onClick={[Function]}
     >
       <span
@@ -29,6 +32,7 @@ exports[`Modal Component should render and match its own snapshot 1`] = `
     </button>
     <button
       className="css-1cvb4bz"
+      id="preview-left-arrow"
       onClick={[Function]}
     >
       <span

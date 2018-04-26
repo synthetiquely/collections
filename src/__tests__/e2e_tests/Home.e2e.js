@@ -9,7 +9,7 @@ import {
 
 describe('Visual Regression Tests', () => {
   let niffy;
-  describe('Search Form', () => {
+  describe('Home Page', () => {
     beforeAll(() => {
       niffy = new Niffy(NIFFY_BASE_HOST, NIFFY_TEST_HOST, NIFFY_OPTIONS);
     });
@@ -20,19 +20,12 @@ describe('Visual Regression Tests', () => {
       });
     });
 
-    describe('Search form perceptual diff test', () => {
+    describe('Home Page perceptual diff test', () => {
       it(
-        'should display cats',
+        'should display search header, content body and footer',
         async () => {
           await co(function* () {
-            return yield niffy.test('/', async (nightmare) => {
-              await co(function* () {
-                return yield nightmare
-                  .type('input', 'cats')
-                  .click('button[type="submit"]')
-                  .wait(3000);
-              });
-            });
+            return yield niffy.test('/');
           });
         },
         ASYNC_CALLBACK_TIMEOUT,
