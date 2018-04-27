@@ -11,10 +11,11 @@ addons:
       packages:
         - xvfb
 install:
-- yarn
-before_script:
 - export DISPLAY=':99.0'
 - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+- sh -e /etc/init.d/xvfb start
+- yarn
+before_script:
 - sleep 3
 - yarn start &
 - sleep 15
