@@ -29,7 +29,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "mobx": "^4.2.0",
-    "mobx-react": "^5.0.0",
+    "mobx-react": "5.1.0-rc.1",
     "mocha": "^5.1.1",
     "niffy": "^0.2.0",
     "nightmare": "^3.0.1",

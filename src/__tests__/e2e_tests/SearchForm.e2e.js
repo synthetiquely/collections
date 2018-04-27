@@ -30,8 +30,7 @@ describe('Visual Regression Tests', () => {
                 return yield nightmare
                   .type('input', 'cats')
                   .click('button[type="submit"]')
-                  .wait(3000)
-                  .end();
+                  .wait(5000);
               });
             });
           });

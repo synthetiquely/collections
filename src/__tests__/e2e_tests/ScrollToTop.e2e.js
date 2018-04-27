@@ -10,6 +10,7 @@ describe('Scroll To Top', () => {
     'should show scroll to top component, if user scrolls down a little bit',
     async () => {
       const nightmare = Nightmare(NIFFY_OPTIONS);
+
       await nightmare
         .goto(NIFFY_TEST_HOST)
         .wait(5000)
