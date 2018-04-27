@@ -20,7 +20,7 @@ before_script:
 - sleep 15
 script:
 - yarn lint
-- yarn test:coverage
+- yarn test:CI
 before_deploy:
 - yarn build
 - echo "Initializing deployment..."
