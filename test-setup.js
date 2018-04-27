@@ -3,7 +3,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-export const ASYNC_CALLBACK_TIMEOUT = 500000;
+export const ASYNC_CALLBACK_TIMEOUT = 200000;
 export const MOBILE_SCREEN_WIDTH = 375;
 export const MOBILE_SCREEN_HEIGHT = 812;
 

@@ -55,9 +55,9 @@ describe('Visual Regression Tests', () => {
             return yield niffy.test('/', async (nightmare) => {
               await co(function* () {
                 return yield nightmare
-                  .wait(10000)
+                  .wait(5000)
                   .click('img')
-                  .wait(10000);
+                  .wait(5000);
               });
             });
           });
@@ -73,9 +73,9 @@ describe('Visual Regression Tests', () => {
               await co(function* () {
                 return yield nightmare
                   .viewport(MOBILE_SCREEN_WIDTH, MOBILE_SCREEN_HEIGHT)
-                  .wait(10000)
+                  .wait(5000)
                   .click('img')
-                  .wait(10000);
+                  .wait(5000);
               });
             });
           });

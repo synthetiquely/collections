@@ -13,7 +13,7 @@ describe('Scroll To Top', () => {
 
       await nightmare
         .goto(NIFFY_TEST_HOST)
-        .wait(10000)
+        .wait(5000)
         .scrollTo(500, 0)
         .wait('#scroll-to-top')
         .exists('#scroll-to-top')
