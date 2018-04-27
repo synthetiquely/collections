@@ -46,7 +46,7 @@ describe('Visual Regression Tests', () => {
               await co(function* () {
                 return yield nightmare
                   .viewport(MOBILE_SCREEN_WIDTH, MOBILE_SCREEN_HEIGHT)
-                  .wait(3000);
+                  .wait(10000);
               });
             });
           });

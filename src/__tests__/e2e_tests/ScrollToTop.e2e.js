@@ -13,7 +13,7 @@ describe('Scroll To Top', () => {
 
       await nightmare
         .goto(NIFFY_TEST_HOST)
-        .wait(5000)
+        .wait(10000)
         .scrollTo(500, 0)
         .wait('#scroll-to-top')
         .exists('#scroll-to-top')
@@ -36,11 +36,11 @@ describe('Scroll To Top', () => {
 
       await nightmare
         .goto(NIFFY_TEST_HOST)
-        .wait(5000)
+        .wait(10000)
         .scrollTo(500, 0)
         .wait('#scroll-to-top')
         .click('#scroll-to-top')
-        .wait(200)
+        .wait(1000)
         .evaluate(() => document.documentElement.scrollTop)
         .end()
         .then((currentScollPosition) => {
