@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`View Component should render and match its own snapshot 1`] = `
+<div
+  className="css-1ykgg8r"
+  onClick={[Function]}
+  tabIndex={0}
+>
+  <img
+    alt="Test Image"
+    className="css-eob8a0"
+    onError={[Function]}
+    onLoad={[Function]}
+    src="https://n6-img-fp.akamaized.net/free-vector/abstract-gray-background-with-lines_1108-73.jpg?size=338&ext=jpg"
+  />
+</div>
+`;

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Swipe Component should render and match its own snapshot 1`] = `
+<form
+  className="css-9v06sd"
+  onSubmit={[Function]}
+>
+  <input
+    autoFocus={true}
+    className="css-3nor7q"
+    id="search"
+    name="search"
+    onChange={[Function]}
+    placeholder="Поиск по коллекциям"
+    type="text"
+    value=""
+  />
+  <button
+    className="css-g7cb4b"
+    type="submit"
+  >
+     
+    <span
+      style={
+        Object {
+          "padding": "0 15px",
+        }
+      }
+    >
+      Найти
+    </span>
+  </button>
+</form>
+`;

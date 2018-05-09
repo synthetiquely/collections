@@ -60,7 +60,7 @@ class ScrollToTop extends Component {
     const { show } = this.state;
     if (show && this.props.show) {
       return (
-        <div className={styles} title="Вернуться наверх">
+        <div id="scroll-to-top" className={styles} title="Вернуться наверх">
           <Button bordered inverted type="button" onClick={this.onClick}>
             <Icon size="md">&uarr;</Icon>
           </Button>

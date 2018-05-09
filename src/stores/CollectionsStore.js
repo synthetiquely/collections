@@ -40,7 +40,7 @@ class CollectionsStore {
       if (this.photos[this.selectedPhotoIndex - 1]) {
         this.selectPhoto(this.photos[this.selectedPhotoIndex - 1].id);
       } else {
-        this.selectPhoto(this.photos[this.photos.length - 1]);
+        this.selectPhoto(this.photos[this.photos.length - 1].id);
       }
     }
   }

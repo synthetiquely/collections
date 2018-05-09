@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collections Component should render and match its own snapshot 1`] = `
+<div>
+  <section
+    className="css-wcs7yy"
+  >
+    <div
+      className="css-h0j9oa"
+      onClick={[Function]}
+      tabIndex={0}
+    >
+      <img
+        alt=""
+        className="css-eob8a0"
+        onError={[Function]}
+        onLoad={[Function]}
+        src={undefined}
+      />
+    </div>
+  </section>
+</div>
+`;

@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preview Component should render and match its own snapshot 1`] = `
+<div
+  className="css-3hsllp"
+>
+  <div
+    className="css-13la5a5"
+    id="preview-modal"
+  >
+    <button
+      className="css-hcjupp"
+      id="preview-close-button"
+      onClick={[Function]}
+    >
+      <span
+        className="css-16yzkgv"
+      >
+        ×
+      </span>
+    </button>
+    <button
+      className="css-10e1v19"
+      id="preview-right-arrow"
+      onClick={[Function]}
+    >
+      <span
+        className="css-937lsz"
+      >
+        ❯
+      </span>
+    </button>
+    <button
+      className="css-1cvb4bz"
+      id="preview-left-arrow"
+      onClick={[Function]}
+    >
+      <span
+        className="css-937lsz"
+      >
+        ❮
+      </span>
+    </button>
+    <div
+      className="css-186ako1"
+      onMouseEnter={undefined}
+      onMouseLeave={undefined}
+    >
+      <div
+        className="css-zmgijg"
+        onTouchEnd={[Function]}
+        onTouchStart={[Function]}
+      >
+        <a
+          href="url"
+          target="_blank"
+        >
+          <img
+            alt="Test Image"
+            className="css-eob8a0"
+            onLoad={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            src="https://n6-img-fp.akamaized.net/free-vector/abstract-gray-background-with-lines_1108-73.jpg?size=338&ext=jpg"
+            style={
+              Object {
+                "maxWidth": "100%",
+                "objectFit": "contain",
+                "width": "auto",
+              }
+            }
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

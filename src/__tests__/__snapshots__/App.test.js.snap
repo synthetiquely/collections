@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component should match its own snapshot 1`] = `
+<div
+  className="css-19xw0t5"
+>
+  <header
+    className="css-j5dasm"
+  >
+    <form
+      className="css-9v06sd"
+      onSubmit={[Function]}
+    >
+      <input
+        autoFocus={true}
+        className="css-3nor7q"
+        id="search"
+        name="search"
+        onChange={[Function]}
+        placeholder="Поиск по коллекциям"
+        type="text"
+        value=""
+      />
+      <button
+        className="css-g7cb4b"
+        type="submit"
+      >
+         
+        <span
+          style={
+            Object {
+              "padding": "0 15px",
+            }
+          }
+        >
+          Найти
+        </span>
+      </button>
+    </form>
+  </header>
+  <main
+    className="css-fn5mmw"
+  >
+    <div
+      className="css-1cb8a8z"
+    >
+      Картинок не найдено. Попробуйте поискать что-нибудь еще.
+    </div>
+  </main>
+  <footer
+    className="css-1gnci24"
+  >
+    <p
+      className="css-1yv2jt6"
+    >
+      The source code is licensed under MIT. See
+       
+      <a
+        className="css-x3f8pk"
+        href="https://github.com/synthetiquely/collections"
+      >
+        public repository
+      </a>
+       
+      for more details.
+      <br />
+      Please note, that images, that are listed above may be subject to copyright.
+    </p>
+  </footer>
+</div>
+`;

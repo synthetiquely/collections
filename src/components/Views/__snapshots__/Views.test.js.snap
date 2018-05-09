@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Views Component should render and match its own snapshot 1`] = `
+<div>
+  <section
+    className="css-wcs7yy"
+  >
+    <div
+      className="css-1ykgg8r"
+      onClick={undefined}
+      tabIndex={0}
+    >
+      <img
+        alt="Test Image 1"
+        className="css-eob8a0"
+        onError={[Function]}
+        onLoad={[Function]}
+        src="https://n6-img-fp.akamaized.net/free-vector/abstract-gray-background-with-lines_1108-73.jpg?size=338&ext=jpg"
+      />
+    </div>
+    <div
+      className="css-rgncr2"
+      onClick={undefined}
+      tabIndex={0}
+    >
+      <img
+        alt="Test Image 2"
+        className="css-eob8a0"
+        onError={[Function]}
+        onLoad={[Function]}
+        src="https://n6-img-fp.akamaized.net/free-vector/abstract-gray-background-with-lines_1108-73.jpg?size=338&ext=jpg"
+      />
+    </div>
+    <div
+      className="css-1phrjfd"
+      onClick={undefined}
+      tabIndex={0}
+    >
+      <img
+        alt="Test Image 3"
+        className="css-eob8a0"
+        onError={[Function]}
+        onLoad={[Function]}
+        src="https://n6-img-fp.akamaized.net/free-vector/abstract-gray-background-with-lines_1108-73.jpg?size=338&ext=jpg"
+      />
+    </div>
+  </section>
+</div>
+`;

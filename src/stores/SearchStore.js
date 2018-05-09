@@ -50,6 +50,8 @@ class SearchStore {
 
       this.setLoading(false);
     });
+
+    return photos;
   }
 
   @action.bound
@@ -71,6 +73,8 @@ class SearchStore {
       }
       this.setLoading(false);
     });
+
+    return photos;
   }
 
   @action.bound

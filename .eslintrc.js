@@ -4,6 +4,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    jest: true,
   },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
@@ -12,5 +13,6 @@ module.exports = {
     'no-mixed-operators': [0],
     'default-case': [0],
     'import/no-unresolved': [0],
+    'func-names': [0],
   },
 };
